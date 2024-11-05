@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+/*  */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
+/* .element {
+  color: rgba(0, 0, 0, 1);
+  font-family: Quicksand, "Quicksand Fallback", sans-serif;
+  font-size: 16px;
+} */
+
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background: #ffffff; /* Colore di sfondo neutro */
+  color: #000000; /* Colore del testo neutro */
+}
+
+main {
+  text-align: center;
+  margin: 5rem auto;
+}
+
+main img {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2)); /* Ombra neutra */
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 3rem auto;
+  color: inherit; /* Usa il colore del testo principale */
+  font-family: 'Poppins', sans-serif;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+p a {
+  color: inherit; /* Usa il colore del testo principale */
+  text-decoration: none;
+  padding-bottom: 0.05rem;
+  border-bottom: 2px solid currentColor; /* Bordo dello stesso colore del testo */
+}
+
+p a:hover,
+p a:active {
+  color: #555; /* Colore leggermente più scuro */
+  border-color: #555; /* Colore del bordo leggermente più scuro */
+}

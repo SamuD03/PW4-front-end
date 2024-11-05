@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&family=Quicksand:wght@400&display=swap');
+
+.overlay {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Evita sovrapposizione con il contenuto */
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* Copre solo la viewport iniziale */
+    z-index: -1;
+    object-fit: cover;
+    transition: transform 0.1s ease-out;
+}
+
+.logo {
+    position: sticky;
+    top: 20vh;
+    /* Fisso a una certa altezza nella viewport */
+    z-index: 1;
+    transition: opacity 0.5s ease;
+}
+
+.desc {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 0 80px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-right: 40px;
+}
+
+.text h2 {
+    font-family: 'Raleway', 'Raleway Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 60px;
+    color: #000000;
+}
+
+.text p {
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.callButton {
+    padding: 10px 20px;
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.callButton a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.callButton:hover {
+    background-color: #e9ad8f;
+}
+
+.iconPhone {
+    font-size: 16px;
+    /* Se usi una libreria di icone, aggiungi qui la classe o l'icona desiderata */
+}
+
+.phoneNumHolder {
+    margin-left: 5px;
+}
+
+.bold {
+    font-weight: bold;
+    color: #000000;
+    /* Cambia colore se desideri */
+}

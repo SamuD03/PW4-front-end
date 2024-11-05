@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
+.element {
+    color: rgba(0, 0, 0, 1);
+    font-family: Quicksand, "Quicksand Fallback", sans-serif;
+    font-size: 16px;
+}
+
+/* Header container styling */
+.headerContainer {
+    margin: 0;
+    padding: 15px 0;
+    background-color: #f3bc9f !important;
+    text-align: center;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navigation list styling */
+.navList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+/* Navigation item styling */
+.navItem {
+    margin: 0 10px;
+}
+
+/* Navigation link styling */
+.navLink {
+    text-decoration: none;
+    color: #000;
+    padding: 5px 10px; /* Aggiungi padding per migliorare l'aspetto del bordo */
+}
+
+.navLink:hover,
+.navLink:focus,
+.navLink.active {
+    border: 2px solid #000; /* Aggiungi bordo quando si passa con il cursore */
+}
+
+/* Active link styling */
+.navLink.active {
+    border: 2px solid #000; /* Mantieni il bordo attivo sulla pagina corrente */
+}
