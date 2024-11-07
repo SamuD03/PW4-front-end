@@ -17,7 +17,6 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    /* Copre solo la viewport iniziale */
     z-index: -1;
     object-fit: cover;
     transition: transform 0.1s ease-out;
@@ -97,4 +96,375 @@
     font-weight: bold;
     color: #000000;
     /* Cambia colore se desideri */
+}
+
+/* info */
+
+.info h2 {
+    font-family: 'Raleway', 'Raleway Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+}
+
+.info p {
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+    max-height: 603px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.orario {
+    display: flex;
+    margin-left: 20px;
+    text-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.orarioL {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    text-wrap: wrap;
+}
+
+.orarioR {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    text-wrap: wrap;
+}
+
+.infoC {
+    display: flex;
+    flex-direction: column;
+    margin-left: 60px;
+}
+
+.infoCImm {
+    border-radius: 20px;
+
+}
+
+.sedi {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+}
+
+/* macaron */
+.imageWrapper {
+    margin-top: 50px;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-image: image('macaron.jpg');
+}
+
+.macaronImage {
+    position: sticky;
+    /* Posiziona l'immagine in modo fisso durante lo scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    object-fit: cover;
+    clip-path: polygon(0 25%, 100% 5%, 100% 70%, 0% 95%);
+    transform: translateY(0);
+    /* Valore iniziale */
+    transition: transform 0.5s ease-out;
+    /* Transizione fluida */
+}
+
+.diagonalImageTop {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.8;
+    /* Effetto di sovrapposizione */
+    clip-path: polygon(0 0, 100% 0, 100% 20%, 0 40%);
+}
+
+.diagonalImageBottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.8;
+    /* Effetto di sovrapposizione */
+    clip-path: polygon(0 60%, 100% 40%, 100% 100%, 0 100%);
+}
+
+/* prodotti */
+.prodotti h2 {
+    font-family: 'Raleway', 'Raleway Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+}
+
+.prodotti p {
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.prodotti {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.macarons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-left: 300px;
+    margin-right: 300px;
+    flex-wrap: wrap;
+}
+
+.confrontoBiscottiConfetture {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    /* text-align: left; */
+}
+
+.biscotti,
+.confetture {
+    flex: 1;
+}
+
+.imgBiscotti,
+.imgConfetture {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 15px;
+    overflow: hidden;
+    /* Nasconde la parte che esce fuori */
+    position: relative;
+    /* Necessario per un corretto comportamento di overflow */
+}
+
+.imgBiscotti img,
+.imgConfetture img {
+    transition: transform 0.3s ease;
+    display: block;
+    /* Rimuove lo spazio bianco sotto l'immagine */
+    width: 100%;
+    /* Assicura che l'immagine occupi tutta la larghezza del contenitore */
+}
+
+.imgBiscotti:hover img,
+.imgConfetture:hover img {
+    transform: scale(1.1);
+    /* Effetto zoom */
+    transform-origin: center;
+    /* Centra lo zoom verso l'interno dell'immagine */
+}
+
+
+.biscotti p {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.confetture p {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+/* barattoli fondo */
+
+.barattoliFondo h2 {
+    font-family: 'Raleway', 'Raleway Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: normal;
+    color: #000000;
+}
+
+.barattoliFondo p {
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: normal;
+    color: #000000;
+}
+
+.barattoliFondo {
+    display: flex;
+}
+
+.background2 {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.barattoli {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-wrap: wrap;
+    margin-left: 100px;
+    margin-right: 700px;
+
+    height: 100vh;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    max-width: 701px;
+    max-height: 401px;
+}
+
+.textBarattoli {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 80px;
+    max-height: 603px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+/* footer */
+.footer h2 {
+    font-family: 'Raleway', 'Raleway Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 45px;
+    color: #ffffff;
+}
+
+.footer p {
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+}
+
+.footer {
+    display: flex;
+    z-index: -1;
+    object-fit: cover;
+    width: 100%;
+    position: relative;
+}
+
+.footerText {
+    display: flex;
+    z-index: 1;
+    object-fit: cover;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    
+}
+
+.footerTextL {
+    display: flex;
+    flex-direction: column;;
+    text-wrap: wrap;
+    flex: 1;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 100px;
+    margin-bottom: 20px;
+}
+
+.footerTextC{
+    display: flex;
+    flex-direction: column;
+    text-wrap: wrap;
+    flex: 1;
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.footerTextC .orarioL{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    text-wrap: wrap;
+}
+
+.footerTextC .orarioR{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    text-wrap: wrap;
+}
+
+.footerTextR{
+    display: flex;
+    flex-direction: column;
+    text-wrap: wrap;
+    flex: 1;
+    position: absolute;
+    left: 75%;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.footer2 {
+    display: flex;
+    background-color: #d5abc2;
+    text-align: center;
+}
+
+.footer2 p {
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+    text-align: center;
+    margin-left: 50%;
 }
