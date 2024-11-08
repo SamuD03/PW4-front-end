@@ -65,9 +65,9 @@
 
 .callButton {
     padding: 10px 20px;
-    background-color: #000000;
+    background-color: #f3bc9f;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-family: 'Quicksand', sans-serif;
     font-size: 16px;
@@ -80,7 +80,7 @@
 }
 
 .callButton:hover {
-    background-color: #e9ad8f;
+    background-color: #ffd1ba;
 }
 
 .iconPhone {
@@ -121,7 +121,6 @@
 .info {
     display: flex;
     flex-direction: row;
-    margin-left: 40px;
     margin-right: 40px;
     margin-top: 40px;
     max-height: 603px;
@@ -398,12 +397,13 @@
     width: 100%;
     position: relative;
     text-align: center;
-    
+
 }
 
 .footerTextL {
     display: flex;
-    flex-direction: column;;
+    flex-direction: column;
+    ;
     text-wrap: wrap;
     flex: 1;
     position: absolute;
@@ -414,7 +414,7 @@
     margin-bottom: 20px;
 }
 
-.footerTextC{
+.footerTextC {
     display: flex;
     flex-direction: column;
     text-wrap: wrap;
@@ -426,21 +426,21 @@
     text-align: center;
 }
 
-.footerTextC .orarioL{
+.footerTextC .orarioL {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
     text-wrap: wrap;
 }
 
-.footerTextC .orarioR{
+.footerTextC .orarioR {
     display: flex;
     flex-direction: column;
     margin-left: 20px;
     text-wrap: wrap;
 }
 
-.footerTextR{
+.footerTextR {
     display: flex;
     flex-direction: column;
     text-wrap: wrap;
@@ -467,4 +467,167 @@
     color: #000000;
     text-align: center;
     margin-left: 50%;
+}
+
+/* mediaquery */
+
+/* Media query per schermi piccoli (tablet e smartphone) */
+@media (max-width: 1024px) {
+    .desc {
+        flex-direction: column;
+        margin: 0 40px;
+    }
+
+    .text h2 {
+        font-size: 32px;
+        line-height: 48px;
+    }
+
+    .text p,
+    .info p,
+    .prodotti p,
+    .footer p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .macarons {
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+
+    .footerTextL,
+    .footerTextC,
+    .footerTextR {
+        position: static;
+        transform: none;
+        margin-left: 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+}
+
+/* Media query per schermi molto piccoli (smartphone in modalità verticale) */
+@media (max-width: 768px) {
+    .desc {
+        margin: 0 20px;
+    }
+
+    .text h2 {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .text p,
+    .info p,
+    .prodotti p,
+    .footer p {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .macarons {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .footer2 p {
+        font-size: 12px;
+    }
+
+    .confrontoBiscottiConfetture {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .imgBiscotti,
+    .imgConfetture {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+/* mediaquery per footer */
+@media (max-width: 768px) {
+    .footer h2 {
+        font-size: 24px;
+        line-height: 36px;
+        color: #000000;
+    }
+
+    .footer p,
+    .footer2 p {
+        font-size: 14px;
+        line-height: 20px;
+        color: #000000;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footerText {
+        flex-direction: column;
+        position: static;
+        transform: none;
+        margin: 0 20px;
+    }
+
+    .footerTextL,
+    .footerTextC,
+    .footerTextR {
+        position: static;
+        transform: none;
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    .footer2 p {
+        margin-left: 0;
+    }
+}
+
+/* per sezione info */
+@media (max-width: 768px) {
+    .info {
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+        max-height: auto;
+    }
+
+    .info h2 {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .info p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .orario,
+    .orarioL,
+    .orarioR,
+    .infoC,
+    .sedi {
+        margin-left: 0;
+        align-items: center;
+        text-align: center;
+    }
+
+    .orarioR {
+        margin-top: 20px;
+    }
+
+    .infoC {
+        margin-top: 20px;
+    }
+
+    .infoCImm {
+        width: 100%;
+        border-radius: 10px;
+    }
 }

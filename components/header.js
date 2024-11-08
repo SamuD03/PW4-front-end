@@ -20,6 +20,9 @@ const Header = () => {
           <li className={classes.navItem}>
             <a href="/contatti" className={`${classes.navLink} ${pathname === '/contatti' ? classes.active : ''}`}>Contatti</a>
           </li>
+          <li className={classes.navItem2}>
+            <a href="/login" className={`${classes.navLink} ${pathname === '/login' ? classes.active : ''}`}>Login</a>
+          </li>
         </ul>
       </nav>
     </header>

@@ -51,3 +51,7 @@
 .navLink.active {
     border: 2px solid #000; /* Mantieni il bordo attivo sulla pagina corrente */
 }
+
+.navItem2 {
+    margin-left: 100%;
+}

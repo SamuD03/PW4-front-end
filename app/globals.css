@@ -61,3 +61,22 @@ p a:active {
   color: #555; /* Colore leggermente più scuro */
   border-color: #555; /* Colore del bordo leggermente più scuro */
 }
+
+h2 {
+  font-family: 'Raleway', 'Raleway Fallback', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 60px;
+  color: #000000;
+}
+
+p {
+  font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  text-align: center;
+}

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import classes from './page.module.css';
 import Image from 'next/image';
 
-// immagine principale corriandoli 
+// Bottone
 const ContactButton = () => {
   const [showNumber, setShowNumber] = useState(false);
 
@@ -24,6 +24,7 @@ const ContactButton = () => {
 
 export default function Home() {
 
+  //immagine principale
   const [offsetY, setOffsetY] = useState(0);
   const descRef = useRef(null); // Riferimento al componente `desc`
 
@@ -95,10 +96,11 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Sezione macaron  */}
       <div className={classes.macaronD}>
         <div className={classes.imageWrapper}>
           <Image src="/diagonaleU.png" alt="Immagine Diagonale Superiore" width={1520} height={100} className={classes.diagonalImageTop} />
-          <Image src="/macaronD.jpg" alt="Immagine Macaron Animazione" width={671} height={751} className={classes.macaronImage} />
+          <Image src="/macaronD.jpg" alt="Immagine Macaron Animazione" width={671} height={751} className={classes.macaronImage} /> 
           <Image src="/diagonaleD.png" alt="Immagine Diagonale Inferiore" width={1520} height={100} className={classes.diagonalImageBottom} />
         </div>
       </div>
@@ -167,6 +169,8 @@ export default function Home() {
       </div>
 
       <div>
+
+
         <div className={classes.barattoliFondo}>
           <div className={classes.background2}>
             <Image src="/Barattoli-fondo.webp" alt="Immagine Barattoli Fondo" width={1519} height={501} />
@@ -232,7 +236,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       <div className={classes.footer2}>
         <p>P.I. 03468950120</p>
       </div>
