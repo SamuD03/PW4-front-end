@@ -1,6 +1,7 @@
 import './globals.css'
 
 import Header from '@/components/header.js';
+import Footer from '@/components/footer';
 
 export const metadata = {
   title: 'NextJS Course App',
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header></Header>
         {children}
+        <Footer></Footer>
       </body>
     </html>
   );

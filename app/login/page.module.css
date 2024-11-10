@@ -1,21 +1,8 @@
-/* .text h2 {
-    font-family: 'Raleway', 'Raleway Fallback', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 60px;
-    color: #000000;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-.text p {
-    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #000000;
-    text-align: center;
-} */
 
 .text {
     display: flex;
@@ -26,23 +13,17 @@
     margin-right: 200px;
 }
 
-.imgBoutique {
-    width: 761px;
-    height: 921px;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .formContainer {
     display: flex;
     gap: 20px;
     justify-content: center;
     align-items: flex-start;
     margin-top: 20px;
+}
+
+.imgBoutique {
+    width: 760px;
+    height: 920px;
 }
 
 .form {

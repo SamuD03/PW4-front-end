@@ -1,0 +1,183 @@
+/* bottone */
+.callButton {
+    padding: 10px 20px;
+    background-color: #f3bc9f;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.callButton a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.callButton:hover {
+    background-color: #ffd1ba;
+}
+
+.iconPhone {
+    font-size: 16px;
+    /* Se usi una libreria di icone, aggiungi qui la classe o l'icona desiderata */
+}
+
+.phoneNumHolder {
+    margin-left: 5px;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+/* 
+.imgBoutique {
+    width: 760px;
+    height: 920px;
+}
+
+.formInformazioni {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.informazioni {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+} */
+
+/* form */
+.formInformazioni {
+    display: flex;
+    align-items: flex-start;
+}
+
+.imgBoutique {
+    width: 760px;
+    height: 920px;
+}
+
+.informazioni {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 150px;
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form p {
+    margin-bottom: 10px;
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-size: 14px;
+    color: #000;
+}
+
+.form label {
+    margin-top: 10px;
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-size: 14px;
+    color: #000;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 2px solid beige;
+    background-color: transparent;
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-size: 14px;
+    color: #000;
+    outline: none;
+}
+
+.form input[type="text"]:focus,
+.form input[type="email"]:focus,
+.form textarea:focus {
+    border-bottom: 2px solid #d2b48c;
+    /* Colore beige scuro */
+}
+
+.form button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #d2b48c;
+    /* Colore beige */
+    border: none;
+    color: #fff;
+    font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+    background-color: #c0a080;
+    /* Colore beige scuro */
+}
+
+
+/* social */
+.social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.titoloSocial {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 960px;
+    /* Larghezza massima del contenitore delle card */
+}
+
+.cardSocial {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    box-shadow: #000 0px 0px 10px;
+    height: 317px;
+    width: 470px;
+    margin: 0 10px;
+    /* Margine tra le card */
+}
+
+.svg {
+    width: 44px;
+    height: 44px;
+}
