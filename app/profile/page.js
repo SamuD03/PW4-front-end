@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';  // Import useRouter from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import classes from './page.module.css';
 
 const ProfilePage = () => {
@@ -9,15 +9,14 @@ const ProfilePage = () => {
     const [notification, setNotification] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    const router = useRouter(); // Initialize the router
+    const router = useRouter();
 
     useEffect(() => {
-        // Fetch the user profile data from the backend
         const fetchProfile = async () => {
             try {
                 const response = await fetch('http://localhost:8080/user/profile', {
                     method: 'GET',
-                    credentials: 'include', // Include cookies in the request
+                    credentials: 'include',
                 });
 
                 if (!response.ok) {
@@ -26,7 +25,7 @@ const ProfilePage = () => {
 
                 const userData = await response.json();
                 setUser(userData);
-                setNotification(userData.notification); // Set initial notification state
+                setNotification(userData.notification);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -52,7 +51,7 @@ const ProfilePage = () => {
                 throw new Error('Failed to update notification preference');
             }
 
-            setNotification(!notification); // Toggle notification state
+            setNotification(!notification);
         } catch (error) {
             setError(error.message);
         }
@@ -62,14 +61,13 @@ const ProfilePage = () => {
         try {
             const response = await fetch('http://localhost:8080/auth/logout', {
                 method: 'DELETE',
-                credentials: 'include', // Include cookies in the request
+                credentials: 'include',
             });
 
             if (!response.ok) {
                 throw new Error('Failed to log out');
             }
 
-            // Redirect to the login page after successful logout
             window.location.href = '/login';
         } catch (error) {
             setError(error.message);
@@ -77,7 +75,7 @@ const ProfilePage = () => {
     };
 
     const handleViewOrders = () => {
-        router.push('/personal-orders'); // Navigate to the PersonalOrders page
+        router.push('/personal-orders');
     };
 
     if (loading) return <div className={classes.loading}>Loading...</div>;
@@ -85,7 +83,7 @@ const ProfilePage = () => {
 
     return (
         <div className={classes.container}>
-            {user ? (
+            <div className={classes.profileCardWrapper}>
                 <div className={classes.profileCard}>
                     <h2>Profile Information</h2>
                     <div className={classes.profileField}>
@@ -116,17 +114,38 @@ const ProfilePage = () => {
                         </label>
                     </div>
                     <button className={classes.logoutButton} onClick={handleLogout}>
-                        <i className="fa fa-sign-out-alt" style={{marginRight: "8px"}}></i> Logout
+                        <i className="fa fa-power-off logoutIcon" style={{marginRight: "8px"}}></i> Logout
                     </button>
-
                     <button className={classes.viewOrdersButton} onClick={handleViewOrders}>
                         <i className="fa fa-list" style={{marginRight: "8px"}}></i> View Orders
                     </button>
-
                 </div>
-            ) : (
-                <div className={classes.error}>No user data available</div>
+            </div>
+
+            {user?.admin && (
+                <div className={classes.adminPanel}>
+                    <h2 className={classes.adminTitle}>Admin Panel</h2>
+                    <button className={classes.adminButton}>
+                        <i className="fa fa-users" style={{marginRight: "10px"}}></i> {/* Icon for User Dashboard */}
+                        User Dashboard
+                    </button>
+                    <button className={classes.adminButton}>
+                        <i className="fa fa-clipboard"
+                           style={{marginRight: "10px"}}></i> {/* Fallback icon for Ingredients Dashboard */}
+                        Ingredients Dashboard
+                    </button>
+                    <button className={classes.adminButton}>
+                        <i className="fa fa-cogs" style={{marginRight: "10px"}}></i> {/* Icon for Product Dashboard */}
+                        Product Dashboard
+                    </button>
+                    <button className={classes.adminButton}>
+                        <i className="fa fa-shopping-cart"
+                           style={{marginRight: "10px"}}></i> {/* Icon for Order Dashboard */}
+                        Order Dashboard
+                    </button>
+                </div>
             )}
+
         </div>
     );
 };

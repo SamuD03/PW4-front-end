@@ -2,14 +2,15 @@
 .container {
     position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; /* Keep the items side by side */
+    justify-content: center; /* Align the items horizontally */
+    align-items: center; /* Align items vertically to the center */
     padding: 40px 20px;
-    min-height: 91vh; /* Make sure it fills the entire screen */
-    justify-content: center;
-    overflow: hidden; /* Ensure the pseudo-element does not overflow */
+    min-height: 91vh; /* Full viewport height */
+    overflow: hidden;
 }
 
+/* Background Styling */
 .container::before {
     content: '';
     position: absolute;
@@ -19,19 +20,92 @@
     bottom: 0;
     background: url('/sfondoprofilo.png') no-repeat center center;
     background-size: cover;
-    z-index: -1; /* Ensure the pseudo-element is behind the content */
+    z-index: -1; /* Ensure the background is behind the content */
 }
+
+/* Admin Layout Styling */
+.adminLayout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Space between the profile and admin panel */
+    align-items: center;
+    width: 100%;
+}
+
+/* Admin Panel */
+.adminPanel {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 350px; /* Increased width for the admin panel */
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    margin-left: 40px; /* Increased margin-left to provide more space */
+    justify-content: space-between; /* Space between buttons */
+    min-width: 500px;
+    min-height: 47vh;
+}
+
+/* Admin Button Styling */
+.adminButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff6f61, #ff4c4c); /* Softer gradient for modern look */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2); /* Larger shadow for depth */
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.adminButton i {
+    font-size: 18px;
+    transition: transform 0.3s ease; /* Smooth icon transition */
+}
+
+/* Admin Button Hover Effect */
+.adminButton:hover {
+    background: linear-gradient(135deg, #ff4c4c, #ff1a1a); /* Slightly darker gradient */
+    box-shadow: 0 6px 14px rgba(255, 0, 0, 0.3);
+    transform: translateY(-4px);
+}
+
+/* Admin Button Active Effect */
+.adminButton:active {
+    transform: translateY(2px);
+}
+
+/* Add some spacing between icon and text */
+.adminButton i {
+    margin-right: 10px; /* Space between the icon and the text */
+}
+
+/* Optionally: Add cool focus effects for accessibility */
+.adminButton:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
 
 /* Profile Card Styling */
 .profileCard {
     width: 100%;
-    max-width: 600px;
+    min-width: 500px;
+    min-height: 47vh;
     border: 1px solid #ddd;
     border-radius: 12px;
     padding: 30px;
     background-color: #fff;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    margin: 20px 0;
 }
 
 /* Profile Card Header */
@@ -76,7 +150,7 @@
     color: #777;
 }
 
-/* Toggle switch styles */
+/* Toggle Switch Styles */
 .toggleSwitch {
     position: relative;
     display: inline-block;
@@ -137,27 +211,25 @@ input:checked + .slider:before {
     padding: 12px 25px;
     font-size: 16px;
     font-weight: 600;
-    background: linear-gradient(135deg, #ff4d4d, #ff3333); /* Gradient Red */
+    background: linear-gradient(135deg, #ff4d4d, #ff3333);
     color: white;
     border: none;
-    border-radius: 30px; /* Round corners for a soft, modern look */
+    border-radius: 30px;
     cursor: pointer;
     width: 100%;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Soft shadow */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
     margin-top: 15px;
 }
 
-/* Hover effect */
 .logoutButton:hover {
-    background: linear-gradient(135deg, #ff3333, #ff1a1a); /* Darker red gradient */
-    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.3); /* Deeper shadow on hover */
-    transform: translateY(-3px); /* Slight lift effect */
+    background: linear-gradient(135deg, #ff3333, #ff1a1a);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.3);
+    transform: translateY(-3px);
 }
 
-/* Active (when clicked) effect */
 .logoutButton:active {
-    transform: translateY(1px); /* Slight depress effect when clicked */
+    transform: translateY(1px);
 }
 
 /* View Orders Button */
@@ -165,29 +237,34 @@ input:checked + .slider:before {
     padding: 12px 25px;
     font-size: 16px;
     font-weight: 600;
-    background: linear-gradient(135deg, #4CAF50, #388E3C); /* Gradient Green */
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
     color: white;
     border: none;
-    border-radius: 30px; /* Rounded corners */
+    border-radius: 30px;
     cursor: pointer;
     width: 100%;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); /* Soft shadow */
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);
     margin-top: 10px;
 }
 
-/* Hover effect */
 .viewOrdersButton:hover {
-    background: linear-gradient(135deg, #388E3C, #2E7D32); /* Darker green gradient */
-    box-shadow: 0 6px 12px rgba(0, 128, 0, 0.3); /* Deeper shadow on hover */
-    transform: translateY(-3px); /* Slight lift effect */
+    background: linear-gradient(135deg, #388E3C, #2E7D32);
+    box-shadow: 0 6px 12px rgba(0, 128, 0, 0.3);
+    transform: translateY(-3px);
 }
 
-/* Active (when clicked) effect */
 .viewOrdersButton:active {
-    transform: translateY(1px); /* Slight depress effect when clicked */
+    transform: translateY(1px);
 }
 
+.adminTitle {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+}
 
 /* Responsive Styling */
 @media (max-width: 768px) {
@@ -209,9 +286,19 @@ input:checked + .slider:before {
         margin-bottom: 15px;
     }
 
-    .logoutButton, .viewOrdersButton {
+    .logoutButton,
+    .viewOrdersButton {
         width: 100%;
         padding: 12px 0;
     }
-}
 
+    .adminPanel {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .container {
+        flex-direction: column; /* Stack them on smaller screens */
+    }
+
+}
