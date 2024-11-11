@@ -125,27 +125,20 @@ const ProfilePage = () => {
             {user?.admin && (
                 <div className={classes.adminPanel}>
                     <h2 className={classes.adminTitle}>Admin Panel</h2>
-                    <button className={classes.adminButton}>
-                        <i className="fa fa-users" style={{marginRight: "10px"}}></i> {/* Icon for User Dashboard */}
-                        User Dashboard
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/user-dashboard')}>
+                        <i className="fa fa-users" style={{marginRight: "10px"}}></i> User Dashboard
                     </button>
-                    <button className={classes.adminButton}>
-                        <i className="fa fa-clipboard"
-                           style={{marginRight: "10px"}}></i> {/* Fallback icon for Ingredients Dashboard */}
-                        Ingredients Dashboard
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/ingredients-dashboard')}>
+                        <i className="fa fa-clipboard" style={{marginRight: "10px"}}></i> Ingredients Dashboard
                     </button>
-                    <button className={classes.adminButton}>
-                        <i className="fa fa-cogs" style={{marginRight: "10px"}}></i> {/* Icon for Product Dashboard */}
-                        Product Dashboard
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/product-dashboard')}>
+                        <i className="fa fa-cogs" style={{marginRight: "10px"}}></i> Product Dashboard
                     </button>
-                    <button className={classes.adminButton}>
-                        <i className="fa fa-shopping-cart"
-                           style={{marginRight: "10px"}}></i> {/* Icon for Order Dashboard */}
-                        Order Dashboard
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/order-dashboard')}>
+                        <i className="fa fa-shopping-cart" style={{marginRight: "10px"}}></i> Order Dashboard
                     </button>
                 </div>
             )}
-
         </div>
     );
 };
