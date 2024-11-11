@@ -173,13 +173,13 @@ export default function Home() {
 
         <div className={classes.barattoliFondo}>
           <div className={classes.background2}>
-            <Image src="/Barattoli-fondo.webp" alt="Immagine Barattoli Fondo" width={1519} height={501} />
+            <Image src="/Barattoli-fondo.webp" alt="Immagine Barattoli Fondo" layout="fill" objectFit="cover"/>
           </div>
           <div className={classes.barattoli}>
             <div className={classes.textBarattoli}>
               <h2>Cerchi una pasticceria artigianale a Varese?</h2>
               <p>Contattaci per prenotare uno dei nostri deliziosi prodotti o per avere maggiori informazioni!</p>
-              <ContactButton />
+              <ContactButton/>
             </div>
           </div>
         </div>

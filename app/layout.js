@@ -1,7 +1,7 @@
 import './globals.css'
 
-import Header from '@/components/header.js';
-import Footer from '@/components/footer';
+import Header from '@/components/header/header.js';
+import Footer from '@/components/footer/footer';
 
 export const metadata = {
   title: 'NextJS Course App',

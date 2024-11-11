@@ -304,13 +304,14 @@
 
 /* barattoli fondo */
 
-.barattoliFondo h2 {
-    font-family: 'Raleway', 'Raleway Fallback', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: normal;
-    color: #000000;
+.barattoliFondo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 50px;
 }
 
 .barattoliFondo p {
@@ -337,17 +338,15 @@
 .barattoli {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    text-wrap: wrap;
-    margin-left: 100px;
-    margin-right: 700px;
-
-    height: 100vh;
-    flex-wrap: wrap;
     background-color: rgba(255, 255, 255, 0.8);
-
-    max-width: 701px;
-    max-height: 401px;
+    border-radius: 10px;
+    padding: 30px 20px;
+    max-width: 800px;
+    margin: 20px;
+    z-index: 1;
 }
 
 .textBarattoli {

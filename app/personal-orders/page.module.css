@@ -1,0 +1,88 @@
+/* General Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Orders List Styling */
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.orderCard {
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 60vh;
+    max-width: 600px; /* Make the card larger */
+    margin-bottom: 15px; /* Add spacing between cards */
+}
+
+.orderCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Order Summary */
+.orderSummary {
+    cursor: pointer;
+}
+
+.orderSummary h3 {
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.orderSummary p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Order Details */
+.orderDetails {
+    margin-top: 15px;
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.orderDetails h4 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.orderDetails ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.orderDetails ul li {
+    padding: 8px 0;
+}
+
+/* Loading and Error States */
+.loading {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
