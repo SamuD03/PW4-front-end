@@ -1,26 +1,26 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import styles from './page.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from "react";
+import styles from "./page.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faEdit, faSeedling } from "@fortawesome/free-solid-svg-icons";
 
 export default function IngredientsDashboard() {
     const [ingredients, setIngredients] = useState([]);
     const [error, setError] = useState(null);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-    const [newIngredient, setNewIngredient] = useState('');
+    const [newIngredient, setNewIngredient] = useState("");
     const [selectedIngredient, setSelectedIngredient] = useState(null);
 
     useEffect(() => {
         async function fetchIngredients() {
             try {
-                const response = await fetch('http://localhost:8080/admin/ingredient', {
-                    credentials: 'include',
+                const response = await fetch("http://localhost:8080/admin/ingredient", {
+                    credentials: "include",
                 });
                 if (!response.ok) {
-                    throw new Error('Failed to fetch ingredients');
+                    throw new Error("Failed to fetch ingredients");
                 }
                 const data = await response.json();
                 setIngredients(data);
@@ -34,19 +34,19 @@ export default function IngredientsDashboard() {
 
     const handleCreate = async () => {
         try {
-            const response = await fetch('http://localhost:8080/admin/ingredient/create', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
+            const response = await fetch("http://localhost:8080/admin/ingredient/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ name: newIngredient }),
             });
             if (response.ok) {
                 const createdIngredient = await response.json();
                 setIngredients([...ingredients, createdIngredient]);
-                setNewIngredient('');
+                setNewIngredient("");
                 setIsCreateOpen(false);
             } else {
-                throw new Error('Failed to create ingredient');
+                throw new Error("Failed to create ingredient");
             }
         } catch (err) {
             setError(err.message);
@@ -55,12 +55,15 @@ export default function IngredientsDashboard() {
 
     const handleUpdate = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/admin/ingredient/${selectedIngredient.id}/update`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ name: selectedIngredient.name }),
-            });
+            const response = await fetch(
+                `http://localhost:8080/admin/ingredient/${selectedIngredient.id}/update`,
+                {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ name: selectedIngredient.name }),
+                }
+            );
             if (response.ok) {
                 const updatedIngredient = await response.json();
                 setIngredients(
@@ -71,15 +74,25 @@ export default function IngredientsDashboard() {
                 setSelectedIngredient(null);
                 setIsUpdateOpen(false);
             } else {
-                throw new Error('Failed to update ingredient');
+                throw new Error("Failed to update ingredient");
             }
         } catch (err) {
             setError(err.message);
         }
     };
 
+    // Dynamic padding based on the number of ingredient cards
+    const containerStyle = {
+        padding:
+            ingredients.length <= 5
+                ? "100px"
+                : ingredients.length <= 10
+                    ? "100px"
+                    : "20px",
+    };
+
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={containerStyle}>
             <h1 className={styles.title}>Ingredients Dashboard</h1>
             {error && <p className={styles.error}>{error}</p>}
 
@@ -89,11 +102,13 @@ export default function IngredientsDashboard() {
                 </button>
             </div>
 
-            <ul className={styles.ingredientsList}>
+            <div className={styles.ingredientsGrid}>
                 {ingredients.map((ingredient) => (
-                    <li key={ingredient.id} className={styles.ingredientItem}>
-                        <span className={styles.ingredientId}>ID: {ingredient.id}</span>
-                        <span className={styles.ingredientName}>{ingredient.name}</span>
+                    <div key={ingredient.id} className={styles.ingredientCard}>
+                        <h2 className={styles.ingredientName}>
+                            <FontAwesomeIcon icon={faSeedling} /> {ingredient.name}
+                        </h2>
+                        <p className={styles.ingredientId}>ID: {ingredient.id}</p>
                         <button
                             className={styles.updateButton}
                             onClick={() => {
@@ -103,9 +118,9 @@ export default function IngredientsDashboard() {
                         >
                             <FontAwesomeIcon icon={faEdit} /> Update
                         </button>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
 
             {isCreateOpen && (
                 <div className={styles.modal}>
