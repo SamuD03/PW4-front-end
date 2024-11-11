@@ -47,7 +47,7 @@ export default function Home() {
 
         <div className={classes.desc} ref={descRef}>
           <div className={classes.text}>
-            <h2>Pasticceria C'est la Vie a Varese</h2>
+            <h2>Pasticceria C&#39;est la Vie a Varese</h2>
             <p>Mi chiamo Giacomo Aceti e sono il titolare di C’est la Vie. La mia pasticceria nasce nel 2015 come
               laboratorio artigianale in via Garibaldi, 5 a Varese e nel 2020 apro un punto vendita espositivo per la
               vendita diretta in Via Carlo Croce, 4.<br/>
