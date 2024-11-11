@@ -116,11 +116,13 @@ const ProfilePage = () => {
                         </label>
                     </div>
                     <button className={classes.logoutButton} onClick={handleLogout}>
-                        Logout
+                        <i className="fa fa-sign-out-alt" style={{marginRight: "8px"}}></i> Logout
                     </button>
+
                     <button className={classes.viewOrdersButton} onClick={handleViewOrders}>
-                        View Orders
+                        <i className="fa fa-list" style={{marginRight: "8px"}}></i> View Orders
                     </button>
+
                 </div>
             ) : (
                 <div className={classes.error}>No user data available</div>

@@ -1,47 +1,73 @@
+/* General Container Styling */
 .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    background-color: #fff;
+    padding: 40px 20px;
+    min-height: 91vh; /* Make sure it fills the entire screen */
+    justify-content: center;
+    overflow: hidden; /* Ensure the pseudo-element does not overflow */
 }
 
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/sfondoprofilo.png') no-repeat center center;
+    background-size: cover;
+    z-index: -1; /* Ensure the pseudo-element is behind the content */
+}
+
+/* Profile Card Styling */
 .profileCard {
-    width: 80%;
+    width: 100%;
     max-width: 600px;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    margin: 20px 0;
 }
 
+/* Profile Card Header */
 .profileCard h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    margin-bottom: 20px;
     text-align: center;
+    color: #333;
+    font-weight: 600;
 }
 
+/* Profile Fields Styling */
 .profileField {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
 }
 
 .profileLabel {
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
 }
 
 .profileValue {
     color: #555;
+    font-weight: 400;
 }
 
+/* Loading and Error States */
 .error {
     color: red;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+    font-size: 18px;
 }
 
 .loading {
@@ -54,8 +80,8 @@
 .toggleSwitch {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: 20px;
+    width: 50px;
+    height: 24px;
 }
 
 .toggleSwitch input {
@@ -79,8 +105,8 @@
 .slider:before {
     position: absolute;
     content: "";
-    height: 14px;
-    width: 14px;
+    height: 18px;
+    width: 18px;
     left: 3px;
     bottom: 3px;
     background-color: white;
@@ -93,38 +119,99 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(20px);
+    transform: translateX(26px);
 }
 
-/* Logout button */
-.logoutButton {
-    padding: 10px 20px;
-    background-color: #ff6666;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+/* Button Styling */
+.button {
+    padding: 12px 25px;
     font-size: 16px;
-    margin-top: 20px;
-}
-
-.logoutButton:hover {
-    background-color: #ff4c4c;
-}
-
-.viewOrdersButton {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    border: none;
     border-radius: 5px;
-    color: white;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
     width: 100%;
+    margin-top: 15px;
 }
 
+/* Logout Button */
+.logoutButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff4d4d, #ff3333); /* Gradient Red */
+    color: white;
+    border: none;
+    border-radius: 30px; /* Round corners for a soft, modern look */
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Soft shadow */
+    margin-top: 15px;
+}
+
+/* Hover effect */
+.logoutButton:hover {
+    background: linear-gradient(135deg, #ff3333, #ff1a1a); /* Darker red gradient */
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.3); /* Deeper shadow on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+/* Active (when clicked) effect */
+.logoutButton:active {
+    transform: translateY(1px); /* Slight depress effect when clicked */
+}
+
+/* View Orders Button */
+.viewOrdersButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #4CAF50, #388E3C); /* Gradient Green */
+    color: white;
+    border: none;
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); /* Soft shadow */
+    margin-top: 10px;
+}
+
+/* Hover effect */
 .viewOrdersButton:hover {
-    background-color: #45a049;
+    background: linear-gradient(135deg, #388E3C, #2E7D32); /* Darker green gradient */
+    box-shadow: 0 6px 12px rgba(0, 128, 0, 0.3); /* Deeper shadow on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+/* Active (when clicked) effect */
+.viewOrdersButton:active {
+    transform: translateY(1px); /* Slight depress effect when clicked */
+}
+
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .profileCard {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .profileField {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profileLabel {
+        margin-bottom: 5px;
+    }
+
+    .profileValue {
+        margin-bottom: 15px;
+    }
+
+    .logoutButton, .viewOrdersButton {
+        width: 100%;
+        padding: 12px 0;
+    }
 }
 
