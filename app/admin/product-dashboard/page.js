@@ -12,7 +12,7 @@ import {
     faDollarSign,
     faWeightHanging,
     faTag,
-    faClipboardList
+    faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductDashboard() {
@@ -20,6 +20,7 @@ export default function ProductDashboard() {
     const [error, setError] = useState(null);
     const [isCreateOpen, setIsCreateOpen] = useState(false);
     const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+    const [isImageUploadOpen, setIsImageUploadOpen] = useState(false);
     const [newProduct, setNewProduct] = useState({
         productName: "",
         description: "",
@@ -29,6 +30,8 @@ export default function ProductDashboard() {
         ingredients: "",
     });
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [selectedProductForImage, setSelectedProductForImage] = useState(null);
+    const [imageURL, setImageURL] = useState("");
     const [imageURLMap, setImageURLMap] = useState({});
 
     useEffect(() => {
@@ -82,6 +85,11 @@ export default function ProductDashboard() {
     };
 
     const handleUpdate = async () => {
+        if (!selectedProduct) {
+            setError("No product selected for update");
+            return;
+        }
+
         try {
             const response = await fetch(
                 `http://localhost:8080/admin/product/${selectedProduct.id}/update`,
@@ -99,23 +107,23 @@ export default function ProductDashboard() {
                     }),
                 }
             );
-            if (response.ok) {
-                const updatedProduct = await response.json();
-                setProducts(
-                    products.map((product) =>
-                        product.id === selectedProduct.id ? updatedProduct : product
-                    )
-                );
-                setSelectedProduct(null);
-                setIsUpdateOpen(false);
-            } else {
+
+            if (!response.ok) {
                 throw new Error("Failed to update product");
             }
+
+            const updatedProduct = await response.json();
+            setProducts(
+                products.map((product) =>
+                    product.id === selectedProduct.id ? updatedProduct : product
+                )
+            );
+            setSelectedProduct(null);
+            setIsUpdateOpen(false);
         } catch (err) {
             setError(err.message);
         }
     };
-
 
     const handleDelete = async (productId) => {
         try {
@@ -136,11 +144,10 @@ export default function ProductDashboard() {
         }
     };
 
-    const handleImageUpload = async (productId) => {
+    const handleImageUpload = async () => {
         try {
-            const imageURL = imageURLMap[productId] || "";
             const response = await fetch(
-                `http://localhost:8080/admin/product/${productId}/upload-image`,
+                `http://localhost:8080/admin/product/${selectedProductForImage.id}/upload-image`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -149,12 +156,15 @@ export default function ProductDashboard() {
                 }
             );
             if (response.ok) {
-                setProducts(
-                    products.map((product) =>
-                        product.id === productId ? { ...product, url: imageURL } : product
+                setProducts((prevProducts) =>
+                    prevProducts.map((product) =>
+                        product.id === selectedProductForImage.id
+                            ? { ...product, url: imageURL }
+                            : product
                     )
                 );
-                setImageURLMap((prev) => ({ ...prev, [productId]: "" }));
+                setIsImageUploadOpen(false);
+                setImageURL("");
                 alert("Image uploaded successfully!");
             } else {
                 throw new Error("Failed to upload image");
@@ -191,27 +201,23 @@ export default function ProductDashboard() {
                                 <img src={product.url} alt={product.productName} className={styles.productImage} />
                                 <button
                                     className={styles.uploadNewImageButton}
-                                    onClick={() => handleImageUpload(product.id)}
+                                    onClick={() => {
+                                        setSelectedProductForImage(product);
+                                        setIsImageUploadOpen(true);
+                                    }}
                                 >
-                                    Upload New Image
+                                    Change Image
                                 </button>
                             </>
                         ) : (
                             <div className={styles.imageUpload}>
-                                <input
-                                    type="text"
-                                    value={imageURLMap[product.id] || ""}
-                                    onChange={(e) =>
-                                        setImageURLMap((prev) => ({
-                                            ...prev,
-                                            [product.id]: e.target.value,
-                                        }))
-                                    }
-                                    placeholder="Enter image URL"
-                                />
+                                your image here
                                 <button
                                     className={styles.uploadButton}
-                                    onClick={() => handleImageUpload(product.id)}
+                                    onClick={() => {
+                                        setSelectedProductForImage(product);
+                                        setIsImageUploadOpen(true);
+                                    }}
                                 >
                                     <FontAwesomeIcon icon={faCloudUploadAlt} /> Upload Image
                                 </button>
@@ -411,6 +417,31 @@ export default function ProductDashboard() {
                 </div>
             )}
 
+            {isImageUploadOpen && (
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <h2>Upload New Image</h2>
+                        <input
+                            type="text"
+                            value={imageURL}
+                            onChange={(e) => setImageURL(e.target.value)}
+                            placeholder="Enter new image URL"
+                            className={styles.inputField}
+                        />
+                        <div className={styles.buttonGroup}>
+                            <button onClick={handleImageUpload} className={styles.updateButton}>
+                                Upload
+                            </button>
+                            <button
+                                onClick={() => setIsImageUploadOpen(false)}
+                                className={styles.cancelButton}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

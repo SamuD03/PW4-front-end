@@ -267,19 +267,22 @@
 .cancelButton:hover {
     background-color: #c82333;
 }
-.uploadNewImageButton {
-    background-color: #17a2b8;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-    margin-top: 10px;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-}
 
 .uploadNewImageButton:hover {
     background-color: #138496;
+}
+
+.uploadButton {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.uploadButton:hover {
+    background-color: #218838;
 }
