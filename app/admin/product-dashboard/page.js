@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -46,7 +48,7 @@ export default function ProductDashboard() {
                 const data = await response.json();
                 setProducts(data);
             } catch (err) {
-                setError(err.message);
+                toast.error(err.message);
             }
         }
 
@@ -80,7 +82,7 @@ export default function ProductDashboard() {
                 throw new Error("Failed to create product");
             }
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message);
         }
     };
 
@@ -109,7 +111,14 @@ export default function ProductDashboard() {
             );
 
             if (!response.ok) {
-                throw new Error("Failed to update product");
+                const errorData = await response.json();
+                // Check if the error is about an ingredient not found
+                if (errorData.message.includes("Ingredient not found")) {
+                    setError(`Ingredient error: ${errorData.message}`);
+                } else {
+                    throw new Error("Failed to update product");
+                }
+                return;
             }
 
             const updatedProduct = await response.json();
@@ -120,8 +129,9 @@ export default function ProductDashboard() {
             );
             setSelectedProduct(null);
             setIsUpdateOpen(false);
+            setError(null);
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message);
         }
     };
 
@@ -140,7 +150,7 @@ export default function ProductDashboard() {
                 throw new Error("Failed to delete product");
             }
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message);
         }
     };
 
@@ -165,12 +175,12 @@ export default function ProductDashboard() {
                 );
                 setIsImageUploadOpen(false);
                 setImageURL("");
-                alert("Image uploaded successfully!");
+                toast.success("Image uploaded successfully!");
             } else {
                 throw new Error("Failed to upload image");
             }
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message);
         }
     };
 
@@ -181,6 +191,7 @@ export default function ProductDashboard() {
 
     return (
         <div className={styles.container} style={containerStyle}>
+            <ToastContainer />
             <h1 className={styles.title}>Product Dashboard</h1>
             {error && <p className={styles.error}>{error}</p>}
 
@@ -402,12 +413,18 @@ export default function ProductDashboard() {
                             rows="4"
                             className={styles.textArea}
                         ></textarea>
+                        {error && error.includes("Ingredient error") && (
+                            <p className={styles.error}>{error}</p> // Display the specific ingredient error
+                        )}
                         <div className={styles.buttonGroup}>
                             <button onClick={handleUpdate} className={styles.updateButton}>
                                 Update
                             </button>
                             <button
-                                onClick={() => setIsUpdateOpen(false)}
+                                onClick={() => {
+                                    setIsUpdateOpen(false);
+                                    setError(null); // Clear error when closing the modal
+                                }}
                                 className={styles.cancelButton}
                             >
                                 Cancel
