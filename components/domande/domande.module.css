@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,700&display=swap");
+
+.domande {
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.domande ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.questionContainer {
+    margin: 10px 0;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-left: 280px;
+
+}
+
+.toggleInput {
+    display: none;
+}
+
+.toggleInput h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000;
+}
+
+.questionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 2px solid #ffd1ba;
+    /* Aggiunge un bordo di 2px con colore blu */
+    width: 900px;
+
+}
+
+.questionHeader:hover {
+    background-color: #ffd1ba;
+}
+
+.toggleButton::before {
+    content: '▼';
+    font-size: 1rem;
+    color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.toggleInput:checked+.questionHeader .toggleButton::before {
+    content: '▲';
+}
+
+.answer {
+    display: none;
+    padding: 15px;
+    color: #000000;
+    background-color: #fff;
+    transition: max-height 0.3s ease;
+    width: 900px;
+}
+
+.toggleInput:checked+.questionHeader+.answer {
+    display: block;
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 600px) {
+    .questionContainer {
+        margin-left: 0;
+    }
+
+    .questionHeader,
+    .answer {
+        width: 100%;
+    }
+}
+
+/* Media query per schermi medi */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .questionContainer {
+        margin-left: 0;
+    }
+
+    .questionHeader,
+    .answer {
+        width: 100%;
+    }
+}

@@ -19,15 +19,6 @@
     background-color: #ffd1ba;
 }
 
-.iconPhone {
-    font-size: 16px;
-    /* Se usi una libreria di icone, aggiungi qui la classe o l'icona desiderata */
-}
-
-.phoneNumHolder {
-    margin-left: 5px;
-}
-
 .text {
     display: flex;
     flex-direction: column;
@@ -35,37 +26,18 @@
     align-items: center;
     margin-left: 200px;
     margin-right: 200px;
+    margin-bottom: 20px;
 }
 
-/* 
-.imgBoutique {
-    width: 760px;
-    height: 920px;
+.text p {
+    width: 900px;
 }
-
-.formInformazioni {
-    display: flex;
-    flex-direction: row;
-    margin-top: 50px;
-}
-
-.informazioni {
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-    margin-left: 40px;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-} */
 
 /* form */
 .formInformazioni {
     display: flex;
     align-items: flex-start;
+    border: 2px solid #ffd1ba;
 }
 
 .imgBoutique {
@@ -78,6 +50,7 @@
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 150px;
+    border: 2px solid #ffd1ba;
 
 }
 
@@ -107,7 +80,7 @@
     padding: 10px;
     margin-top: 5px;
     border: none;
-    border-bottom: 2px solid beige;
+    border-bottom: 2px solid #f3bc9f;
     background-color: transparent;
     font-family: 'Quicksand', 'Quicksand Fallback', sans-serif;
     font-size: 14px;
@@ -118,14 +91,14 @@
 .form input[type="text"]:focus,
 .form input[type="email"]:focus,
 .form textarea:focus {
-    border-bottom: 2px solid #d2b48c;
+    border-bottom: 2px solid #f3bc9f;
     /* Colore beige scuro */
 }
 
 .form button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #d2b48c;
+    background-color: #f3bc9f;
     /* Colore beige */
     border: none;
     color: #fff;
@@ -136,8 +109,7 @@
 }
 
 .form button:hover {
-    background-color: #c0a080;
-    /* Colore beige scuro */
+    background-color: #ffd1ba;
 }
 
 
@@ -177,7 +149,140 @@
     /* Margine tra le card */
 }
 
+.cardSocial:hover {
+    /* Aggiungi qui gli stili desiderati per l'hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .svg {
     width: 44px;
     height: 44px;
+}
+
+/* mappa */
+.mappa {
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Media query per schermi piccoli (smartphone) */
+@media (max-width: 600px) {
+    .text {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .text p {
+        width: 100%;
+    }
+
+    .imgBoutique {
+        width: 100%;
+        height: auto;
+    }
+
+    .informazioni {
+        margin-top: 50px;
+    }
+
+    .cardContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cardSocial {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Media query per schermi medi (tablet) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .text {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .text p {
+        width: 100%;
+    }
+
+    .imgBoutique {
+        width: 100%;
+        height: auto;
+    }
+
+    .informazioni {
+        margin-top: 100px;
+    }
+
+    .cardContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cardSocial {
+        width: 80%;
+        margin: 10px 0;
+    }
+}
+
+
+/* Media query per dispositivi mobili */
+@media (max-width: 600px) {
+    .formInformazioni {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imgBoutique {
+        width: 100%;
+        height: auto;
+    }
+
+    .informazioni {
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    .form input[type="text"],
+    .form input[type="email"],
+    .form textarea {
+        width: 100%;
+    }
+
+    .form button {
+        width: 100%;
+    }
+}
+
+
+/* Media query per schermi medi (tablet) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .formInformazioni {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imgBoutique {
+        width: 100%;
+        height: auto;
+    }
+
+    .informazioni {
+        margin-top: 100px;
+        width: 100%;
+    }
+
+    .form input[type="text"],
+    .form input[type="email"],
+    .form textarea {
+        width: 100%;
+    }
+
+    .form button {
+        width: 100%;
+    }
 }
