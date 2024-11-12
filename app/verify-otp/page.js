@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from './page.module.css';
 
 export default function VerifyOtp() {
@@ -9,6 +9,20 @@ export default function VerifyOtp() {
     const [error, setError] = useState("");
     const [otpSent, setOtpSent] = useState(false);
     const [loading, setLoading] = useState(false); // Stato per il caricamento
+    const [countdown, setCountdown] = useState(30); // Stato per il countdown
+    const [canResend, setCanResend] = useState(false); // Stato per il pulsante di reinvio
+
+    useEffect(() => {
+        let timer;
+        if (otpSent && countdown > 0) {
+            timer = setInterval(() => {
+                setCountdown((prevCountdown) => prevCountdown - 1);
+            }, 1000);
+        } else if (countdown === 0) {
+            setCanResend(true);
+        }
+        return () => clearInterval(timer);
+    }, [otpSent, countdown]);
 
     const handleSendOtp = async (e) => {
         e.preventDefault();
@@ -29,6 +43,8 @@ export default function VerifyOtp() {
 
             if (response.ok) {
                 setOtpSent(true);
+                setCountdown(30); // Reset countdown
+                setCanResend(false); // Disabilita il pulsante di reinvio
                 alert("OTP inviato!");
             } else {
                 const errorData = await response.json();
@@ -74,36 +90,42 @@ export default function VerifyOtp() {
 
     return (
         <div className={classes.container}>
-            <h2>Verifica il tuo Numero di Telefono</h2>
-            {error && <p className={classes.error}>{error}</p>}
 
-            <form onSubmit={otpSent ? handleVerifyOtp : handleSendOtp}>
-                <label htmlFor="phoneNumber">Numero di Telefono</label>
-                <input
-                    type="text"
-                    id="phoneNumber"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    required
-                />
+            <div className={classes.formContainer}>
 
-                {otpSent && (
-                    <>
-                        <label htmlFor="otp">OTP</label>
-                        <input
-                            type="text"
-                            id="otp"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                            required
-                        />
-                    </>
-                )}
+                <div className={classes.form}>
+                    <h2>Verifica il tuo Numero di Telefono</h2>
+                    {error && <p className={classes.error}>{error}</p>}
 
-                <button type="submit" className={classes.submitButton} disabled={loading}>
-                    {loading ? "Caricamento..." : otpSent ? "Verifica OTP" : "Invia OTP"}
-                </button>
-            </form>
+                    <form onSubmit={otpSent ? handleVerifyOtp : handleSendOtp}>
+                        <label htmlFor="phoneNumber">Numero di Telefono</label>
+                        <input type="text" id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+
+                        {otpSent && (
+                            <>
+                                <label htmlFor="otp">OTP</label>
+                                <input type="text" id="otp" value={otp} onChange={(e) => setOtp(e.target.value)} required />
+                            </>
+                        )}
+
+                        <button type="submit" className={classes.submitButton} disabled={loading}>
+                            {loading ? "Caricamento..." : otpSent ? "Verifica OTP" : "Invia OTP"}
+                        </button>
+
+
+                        {otpSent && (
+                            <div>
+                                <p>Puoi reinviare l'OTP in {countdown} secondi.</p>
+                                <button onClick={handleSendOtp} className={classes.resendButton} disabled={!canResend}>
+                                    Reinvio OTP
+                                </button>
+                            </div>
+                        )}
+                    </form>
+
+
+                </div>
+            </div>
         </div>
     );
 }

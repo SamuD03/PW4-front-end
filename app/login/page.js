@@ -1,25 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import ImmaginePrincipale from "@/components/immagine-principale/immagine-principale";
 import classes from './page.module.css';
-
-const ContactButton = () => {
-    const [showNumber, setShowNumber] = useState(false);
-
-    return (
-        <button
-            className={classes.callButton}
-            onClick={() => setShowNumber(!showNumber)}
-        >
-            {showNumber ? (
-                <a href="tel:+393277380932">+39 327 7380932</a>
-            ) : (
-                "Chiamaci"
-            )}
-        </button>
-    );
-};
 
 export default function Login() {
     const [emailOrPhone, setEmailOrPhone] = useState("");
@@ -68,9 +50,12 @@ export default function Login() {
                 if (sessionCookie) {
                     const sessionIdValue = sessionCookie.split("=")[1];
                     setSessionId(sessionIdValue);
+                    window.location.href = "/";  // Redirige alla pagina del profilo
                 }
             } else {
-                setError("Username o password errati.");
+                const errorText = await response.text();
+                console.error("Errore nella risposta del server:", errorText);
+                setError(`Se il tuo account non è verificato procedi subito, un'email è stata inviata. Se il tuo account è verificato, username o password errata.`);
             }
         } catch (error) {
             console.error("Errore di rete:", error);
@@ -102,12 +87,13 @@ export default function Login() {
                 if (sessionCookie) {
                     const sessionIdValue = sessionCookie.split("=")[1];
                     setSessionId(sessionIdValue);
+                    window.location.href = "/";  // Redirige alla pagina del profilo
                 }
             } else {
                 // Leggi la risposta di errore come testo
                 const errorText = await loginResponse.text();
                 console.error("Errore nella risposta del server:", errorText);
-                setError(`Errore: ${errorText}`); // Mostra l'errore dettagliato
+                setError('Se il tuo account non è verificato procedi subito, qui sotto trovi il link per generare una nuova otp. Se il tuo account è verificato, username o password errata.'); // Mostra l'errore dettagliato
             }
         } catch (error) {
             console.error("Errore di connessione:", error);
@@ -117,66 +103,39 @@ export default function Login() {
 
 
     return (
-        <div className={classes.container}>
-            <ImmaginePrincipale />
-            <div className={classes.text}>
-                <h2>La nostra pasticceria artigianale ti aspetta!</h2>
-                <p>... (Testo di presentazione)</p>
-                <ContactButton />
-            </div>
+        <>
+            <div className={classes.container}>
 
-            <div className={classes.formContainer}>
-                <img src="boutique.jpg" alt="immagine1" className={classes.imgBoutique} />
+                <div className={classes.formContainer}>
 
-                <div className={classes.form}>
-                    <h2>Accedi</h2>
-                    {error && <p className={classes.error}>{error}</p>}
-                    {sessionId && <p className={classes.success}>Sessione attiva con ID: {sessionId}</p>}
+                    <div className={classes.form}>
+                        <h2>Accedi</h2>
+                        {error && <p className={classes.error}>{error}</p>}
+                        {sessionId && <p className={classes.success}>Sessione attiva con ID: {sessionId}</p>}
 
-                    <form onSubmit={handleLogin}>
-                        <label htmlFor="emailOrPhone">Email o Numero di Telefono</label>
-                        <input
-                            type="text"
-                            id="emailOrPhone"
-                            name="emailOrPhone"
-                            className={classes.inputField}
-                            value={emailOrPhone}
-                            onChange={(e) => setEmailOrPhone(e.target.value)}
-                            required
-                        />
-                        {otpSent && (
-                            <>
-                                <label htmlFor="otp">OTP</label>
-                                <input
-                                    type="text"
-                                    id="otp"
-                                    name="otp"
-                                    className={classes.inputField}
-                                    value={otp}
-                                    onChange={(e) => setOtp(e.target.value)}
-                                    required
-                                />
-                            </>
-                        )}
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            className={classes.inputField}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <button type="submit" className={classes.submitButton}>
-                            Login
-                        </button>
-                    </form>
+                        <form onSubmit={handleLogin}>
+                            <label htmlFor="emailOrPhone">Email o Numero di Telefono</label>
+                            <input type="text" id="emailOrPhone" name="emailOrPhone" className={classes.inputField} value={emailOrPhone} onChange={(e) => setEmailOrPhone(e.target.value)} required />
+                            {otpSent && (
+                                <>
+                                    <label htmlFor="otp">OTP</label>
+                                    <input type="text" id="otp" name="otp" className={classes.inputField} value={otp} onChange={(e) => setOtp(e.target.value)} required />
+                                </>
+                            )}
+                            <label htmlFor="password">Password</label>
+                            <input type="password" id="password" name="password" className={classes.inputField} value={password} onChange={(e) => setPassword(e.target.value)} required />
+                            <button type="submit" className={classes.submitButton}>
+                                Login
+                            </button>
+                        </form>
 
-                    <p>Non hai un account? <a href="/registrati">Registrati</a></p>
-                    <p>Non hai un numero verificato? <button onClick={() => window.location.href = "/verify-otp"}>Verifica il tuo numero</button></p>
+                        <p>Non hai un account? <br /> <a href="/registrati">Registrati</a></p>
+                        <p>Stai inserendo un numero non ancora verificato? <br /> <a href="/verify-otp">Verificalo ora</a></p>
+                    </div>
+
                 </div>
+
             </div>
-        </div>
+        </>
     );
 }

@@ -17,6 +17,11 @@ export default function Registrati() {
         setError("");
         setSuccess("");
 
+        if (!email && !number) {
+            setError("Devi inserire almeno l'email o il numero di telefono.");
+            return;
+        }
+
         try {
             const response = await fetch("http://localhost:8080/auth/register", {
                 method: "POST",
@@ -28,6 +33,7 @@ export default function Registrati() {
 
             if (response.ok) {
                 setSuccess("Registrazione completata con successo!");
+                window.location.href = "/login";  // Redirige alla pagina di login
             } else if (response.status === 400) {
                 const data = await response.json();
                 setError(data.message || "Utente già presente.");
@@ -42,69 +48,39 @@ export default function Registrati() {
 
     return (
         <div className={classes.container}>
-            <div className={classes.form}>
-                <h2>Registrati</h2>
-                {error && <p className={classes.error}>{error}</p>}
-                {success && <p className={classes.success}>{success}</p>}
-                <form onSubmit={handleRegister}>
-                    <label htmlFor="name">Nome</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className={classes.inputField}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
 
-                    <label htmlFor="surname">Cognome</label>
-                    <input
-                        type="text"
-                        id="surname"
-                        name="surname"
-                        className={classes.inputField}
-                        value={surname}
-                        onChange={(e) => setSurname(e.target.value)}
-                        required
-                    />
+            <div className={classes.formContainer}>
 
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        className={classes.inputField}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+                <div className={classes.form}>
+                    <h2>Registrati</h2>
 
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        className={classes.inputField}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
+                    {error && <p className={classes.error}>{error}</p>}
+                    {success && <p className={classes.success}>{success}</p>}
+                    <form onSubmit={handleRegister}>
 
-                    <label htmlFor="number">Numero di telefono</label>
-                    <input
-                        type="tel"
-                        id="number"
-                        name="number"
-                        className={classes.inputField}
-                        value={number}
-                        onChange={(e) => setNumber(e.target.value)}
-                        required
-                    />
+                        <label htmlFor="name">Nome</label>
+                        <input type="text" id="name" name="name" className={classes.inputField} value={name} onChange={(e) => setName(e.target.value)} required />
 
-                    <button type="submit" className={classes.submitButton}>Registrati</button>
-                </form>
+                        <label htmlFor="surname">Cognome</label>
+                        <input type="text" id="surname" name="surname" className={classes.inputField} value={surname} onChange={(e) => setSurname(e.target.value)} required />
+
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" name="email" className={classes.inputField} value={email} onChange={(e) => setEmail(e.target.value)} />
+
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" name="password" className={classes.inputField} value={password} onChange={(e) => setPassword(e.target.value)} required />
+
+                        <label htmlFor="number">Numero di telefono</label>
+                        <input type="tel" id="number" name="number" className={classes.inputField} value={number} onChange={(e) => setNumber(e.target.value)} />
+
+                        <button type="submit" className={classes.submitButton}>Registrati</button>
+
+                    </form>
+
+                </div>
+
             </div>
+
         </div>
     );
 }

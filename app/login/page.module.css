@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("/login.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .text {
@@ -18,22 +22,20 @@
     gap: 20px;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 20px;
-}
-
-.imgBoutique {
-    width: 760px;
-    height: 920px;
+    margin-top: 110px;
+    margin-bottom: 110px;
 }
 
 .form {
     display: flex;
     flex-direction: column;
     width: 300px;
-    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
+    height: auto;
+    width: 600px;
+    padding: 30px;
 }
 
 .form h2 {
@@ -62,7 +64,7 @@
 }
 
 .submitButton:hover {
-    background-color: #005bb5;
+    background-color: #ffd1ba;
 }
 
 .error {
@@ -71,32 +73,58 @@
     margin-bottom: 10px;
 }
 
-/* bottone */
-.callButton {
-    padding: 10px 20px;
-    background-color: #f3bc9f;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 16px;
-    margin-top: 20px;
+/* Media Queries per uso responsive */
+@media (max-width: 1200px) {
+    .text {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+
+    .form {
+        width: 500px;
+    }
 }
 
-.callButton a {
-    text-decoration: none;
-    color: inherit;
+@media (max-width: 992px) {
+    .text {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .form {
+        width: 400px;
+    }
 }
 
-.callButton:hover {
-    background-color: #ffd1ba;
+@media (max-width: 768px) {
+    .text {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .form {
+        width: 300px;
+    }
+
+    .formContainer {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
-.iconPhone {
-    font-size: 16px;
-    /* Se usi una libreria di icone, aggiungi qui la classe o l'icona desiderata */
-}
+@media (max-width: 576px) {
+    .text {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 
-.phoneNumHolder {
-    margin-left: 5px;
+    .form {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .formContainer {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
 }
