@@ -161,7 +161,7 @@ export default function OrderDashboard() {
                                 Export
                             </button>
                             <button onClick={() => setIsExportOpen(false)} className={styles.cancelButton}>
-                                Cancel
+                                Close
                             </button>
                         </div>
                     </div>

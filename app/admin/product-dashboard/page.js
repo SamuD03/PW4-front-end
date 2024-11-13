@@ -248,7 +248,7 @@ export default function ProductDashboard() {
                         {products.map((product) => (
                             <div key={product.id} className={styles.productCard}>
                                 <h2 className={styles.productName}>
-                                <FontAwesomeIcon icon={faBox}/> {product.productName}
+                                    <FontAwesomeIcon icon={faBox}/> {product.productName}
                                 </h2>
                                 {product.url && product.url !== "nan" ? (
                                     <>
@@ -330,6 +330,7 @@ export default function ProductDashboard() {
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
                         <h2>Create Product</h2>
+                        <label htmlFor="Name">Name</label>
                         <input
                             type="text"
                             value={newProduct.productName}
@@ -338,43 +339,48 @@ export default function ProductDashboard() {
                             }
                             placeholder="Product Name"
                         />
+                        <label htmlFor="Description">Description</label>
                         <textarea
                             value={newProduct.description}
                             onChange={(e) =>
-                                setNewProduct({ ...newProduct, description: e.target.value })
+                                setNewProduct({...newProduct, description: e.target.value})
                             }
                             placeholder="Description"
                             rows="3"
                         ></textarea>
+                        <label htmlFor="Quantity">Quantity</label>
                         <input
                             type="number"
                             value={newProduct.quantity}
                             onChange={(e) =>
-                                setNewProduct({ ...newProduct, quantity: parseInt(e.target.value) })
+                                setNewProduct({...newProduct, quantity: parseInt(e.target.value)})
                             }
                             placeholder="Quantity"
                         />
+                        <label htmlFor="Price">Price</label>
                         <input
                             type="number"
                             step="0.01"
                             value={newProduct.price}
                             onChange={(e) =>
-                                setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })
+                                setNewProduct({...newProduct, price: parseFloat(e.target.value)})
                             }
                             placeholder="Price"
                         />
+                        <label htmlFor="Category">Category</label>
                         <input
                             type="text"
                             value={newProduct.category}
                             onChange={(e) =>
-                                setNewProduct({ ...newProduct, category: e.target.value })
+                                setNewProduct({...newProduct, category: e.target.value})
                             }
                             placeholder="Category"
                         />
+                        <label htmlFor="Ingredients">Ingredients (comma-separated)</label>
                         <textarea
-                            value={newProduct.ingredients}
+                        value={newProduct.ingredients}
                             onChange={(e) =>
-                                setNewProduct({ ...newProduct, ingredients: e.target.value })
+                                setNewProduct({...newProduct, ingredients: e.target.value})
                             }
                             placeholder="Ingredients (comma-separated)"
                             rows="3"
@@ -389,7 +395,7 @@ export default function ProductDashboard() {
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
                         <h2>Edit Product</h2>
-                        <label htmlFor="name">name</label>
+                        <label htmlFor="Name">Name</label>
                         <input
                             type="text"
                             value={selectedProduct.productName || ""}
@@ -402,7 +408,7 @@ export default function ProductDashboard() {
                             placeholder="Product Name"
                             className={styles.inputField}
                         />
-                        <label htmlFor="description">description</label>
+                        <label htmlFor="Description">Description</label>
                         <textarea
                             value={selectedProduct.description || ""}
                             onChange={(e) =>
@@ -415,7 +421,7 @@ export default function ProductDashboard() {
                             rows="4"
                             className={styles.textArea}
                         ></textarea>
-                        <label htmlFor="quantity">quantity</label>
+                        <label htmlFor="Quantity">Quantity</label>
                         <input
                             type="number"
                             value={selectedProduct.quantity || 0}
@@ -428,7 +434,7 @@ export default function ProductDashboard() {
                             placeholder="Quantity"
                             className={styles.inputField}
                         />
-                        <label htmlFor="price">price</label>
+                        <label htmlFor="Price">Price</label>
                         <input
                             type="number"
                             step="0.01"
@@ -442,7 +448,7 @@ export default function ProductDashboard() {
                             placeholder="Price"
                             className={styles.inputField}
                         />
-                        <label htmlFor="category">category</label>
+                        <label htmlFor="Category">Category</label>
                         <input
                             type="text"
                             value={selectedProduct.category || ""}
@@ -455,7 +461,7 @@ export default function ProductDashboard() {
                             placeholder="Category"
                             className={styles.inputField}
                         />
-                        <label htmlFor="ingredients">Ingredients</label>
+                        <label htmlFor="Ingredients">Ingredients (comma-separated)</label>
                         <textarea
                             value={selectedProduct.ingredients || ""}
                             onChange={(e) =>

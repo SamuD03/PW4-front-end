@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faEdit, faSeedling } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faEdit, faSeedling,faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function IngredientsDashboard() {
     const [ingredients, setIngredients] = useState([]);
@@ -94,6 +94,24 @@ export default function IngredientsDashboard() {
         }
     };
 
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:8080/admin/ingredient/${id}/delete`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+            if (response.ok) {
+                setIngredients(ingredients.filter((ingredient) => ingredient.id !== id));
+                toast.success("Ingredient deleted successfully!"); // Success toast
+            } else {
+                const errorText = await response.text();
+                toast.error(errorText); // Display the specific error message from the response
+            }
+        } catch (err) {
+            toast.error(err.message); // Error toast
+        }
+    };
+
     const containerStyle = {
         padding:
             ingredients.length <= 5
@@ -133,6 +151,12 @@ export default function IngredientsDashboard() {
                                 }}
                             >
                                 <FontAwesomeIcon icon={faEdit} /> Update
+                            </button>
+                            <button
+                                className={styles.deleteButton}
+                                onClick={() => handleDelete(ingredient.id)}
+                            >
+                                <FontAwesomeIcon icon={faTrashAlt} /> Delete
                             </button>
                         </div>
                     ))}
