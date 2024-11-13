@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faEdit, faSeedling } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +14,7 @@ export default function IngredientsDashboard() {
     const [isUpdateOpen, setIsUpdateOpen] = useState(false);
     const [newIngredient, setNewIngredient] = useState("");
     const [selectedIngredient, setSelectedIngredient] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchIngredients() {
@@ -25,7 +28,9 @@ export default function IngredientsDashboard() {
                 const data = await response.json();
                 setIngredients(data);
             } catch (err) {
-                setError(err.message);
+                toast.error(err.message); // Show error toast
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -45,11 +50,17 @@ export default function IngredientsDashboard() {
                 setIngredients([...ingredients, createdIngredient]);
                 setNewIngredient("");
                 setIsCreateOpen(false);
+                toast.success("Ingredient created successfully!"); // Success toast
             } else {
-                throw new Error("Failed to create ingredient");
+                const errorText = await response.text();
+                if (errorText === "Ingredient already exists") {
+                    toast.error("Ingredient already exists!"); // Specific error toast
+                } else {
+                    throw new Error("Failed to create ingredient");
+                }
             }
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message); // Error toast
         }
     };
 
@@ -73,26 +84,28 @@ export default function IngredientsDashboard() {
                 );
                 setSelectedIngredient(null);
                 setIsUpdateOpen(false);
+                toast.success("Ingredient updated successfully!"); // Success toast
             } else {
-                throw new Error("Failed to update ingredient");
+                const errorText = await response.text();
+                toast.error(errorText); // Display the specific error message from the response
             }
         } catch (err) {
-            setError(err.message);
+            toast.error(err.message); // Error toast
         }
     };
 
-    // Dynamic padding based on the number of ingredient cards
     const containerStyle = {
         padding:
             ingredients.length <= 5
                 ? "100px"
-                : ingredients.length <= 10
-                    ? "100px"
-                    : "20px",
+                : ingredients.length <= 15
+                    ? "80px"
+                    : "10px",
     };
 
     return (
         <div className={styles.container} style={containerStyle}>
+            <ToastContainer />
             <h1 className={styles.title}>Ingredients Dashboard</h1>
             {error && <p className={styles.error}>{error}</p>}
 
@@ -102,25 +115,29 @@ export default function IngredientsDashboard() {
                 </button>
             </div>
 
-            <div className={styles.ingredientsGrid}>
-                {ingredients.map((ingredient) => (
-                    <div key={ingredient.id} className={styles.ingredientCard}>
-                        <h2 className={styles.ingredientName}>
-                            <FontAwesomeIcon icon={faSeedling} /> {ingredient.name}
-                        </h2>
-                        <p className={styles.ingredientId}>ID: {ingredient.id}</p>
-                        <button
-                            className={styles.updateButton}
-                            onClick={() => {
-                                setSelectedIngredient(ingredient);
-                                setIsUpdateOpen(true);
-                            }}
-                        >
-                            <FontAwesomeIcon icon={faEdit} /> Update
-                        </button>
-                    </div>
-                ))}
-            </div>
+            {loading ? (
+                <div className={styles.loading}>Loading...</div>
+            ) : (
+                <div className={styles.ingredientsGrid}>
+                    {ingredients.map((ingredient) => (
+                        <div key={ingredient.id} className={styles.ingredientCard}>
+                            <h2 className={styles.ingredientName}>
+                                <FontAwesomeIcon icon={faSeedling} /> {ingredient.name}
+                            </h2>
+                            <p className={styles.ingredientId}>ID: {ingredient.id}</p>
+                            <button
+                                className={styles.updateButton}
+                                onClick={() => {
+                                    setSelectedIngredient(ingredient);
+                                    setIsUpdateOpen(true);
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faEdit} /> Update
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
 
             {isCreateOpen && (
                 <div className={styles.modal}>

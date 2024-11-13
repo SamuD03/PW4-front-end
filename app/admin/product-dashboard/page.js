@@ -203,7 +203,7 @@ export default function ProductDashboard() {
             <h1 className={styles.title}>Product Dashboard</h1>
             {error && <p className={styles.error}>{error}</p>}
 
-            {loading ? ( // Conditional rendering based on loading state
+            {loading ? (
                 <div className={styles.loading}>Loading products...</div>
             ) : (
                 // Render the product dashboard once loading is complete
