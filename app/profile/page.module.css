@@ -29,7 +29,7 @@
     flex-direction: row;
     justify-content: space-between; /* Space between the profile and admin panel */
     align-items: center;
-    width: 100%;
+    width: 90%;
 }
 
 /* Admin Panel */
@@ -94,7 +94,6 @@
     outline: none;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
-
 
 /* Profile Card Styling */
 .profileCard {
@@ -268,9 +267,24 @@ input:checked + .slider:before {
 
 /* Responsive Styling */
 @media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack them on smaller screens */
+        padding: 20px 10px;
+    }
+
+    .adminPanel {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+        min-width: unset;
+
+    }
+
     .profileCard {
-        width: 90%;
+        width: 100%;
         padding: 20px;
+        min-width: unset;
+
     }
 
     .profileField {
@@ -291,14 +305,4 @@ input:checked + .slider:before {
         width: 100%;
         padding: 12px 0;
     }
-
-    .adminPanel {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    .container {
-        flex-direction: column; /* Stack them on smaller screens */
-    }
-
 }

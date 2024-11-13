@@ -1,24 +1,45 @@
-/* General header and navigation styles */
 .headerContainer {
     margin: 0;
     padding: 15px 0;
     background-color: #f3bc9f;
     text-align: center;
+    position: relative;
+    z-index: 1000; /* Bring the header container to the front */
 }
 
 .header {
     display: flex;
-    justify-content: center; /* Center the main navigation items */
+    justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    position: relative; /* Position relative to anchor the profile/login link */
+    position: relative;
+    z-index: 1001; /* Ensure the header is above the container */
 }
 
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    z-index: 1002; /* Ensure the hamburger menu is above the header */
+}
+
+/* Navigation list styles */
 .navList {
     display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
+    transition: all 0.3s ease;
+    flex-grow: 1; /* Allow the nav list to grow and take up remaining space */
+    justify-content: center; /* Center the nav items */
+    z-index: 1003; /* Ensure the navigation list is above the header */
+}
+
+.navListOpen {
+    display: block;
+    flex-direction: column;
 }
 
 .navItem {
@@ -38,25 +59,36 @@
 }
 
 /* Profile icon and login link styles */
-.navItem2 {
-    position: absolute; /* Use absolute positioning */
-    right: 20px; /* Place the link/icon near the outermost right */
-    padding-right: 50px;
-}
-
-/* Profile icon styles */
-.profileIconLink {
+.profileContainer {
+    position: absolute;
+    right: 20px;
+    z-index: 1004; /* Ensure the profile/login link is above the header */
     display: flex;
     align-items: center;
-    border: none;
-    cursor: pointer;
 }
 
-/* Profile icon hover effect */
-.profileIconLink:hover svg {
-    transition: all 0.3s ease;
-}
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
 
-.profileIconLink:hover svg path {
-    d: path("M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z");
+    .navList {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f3bc9f;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .navListOpen {
+        display: flex;
+    }
+
+    .navItem {
+        margin: 10px 0;
+    }
 }

@@ -191,6 +191,28 @@ export default function ProductDashboard() {
             toast.error(err.message);
         }
     };
+    const handleExport = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/admin/product/export", {
+                method: "GET",
+                credentials: "include",
+            });
+            if (!response.ok) {
+                throw new Error("Failed to export products");
+            }
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "products.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            toast.success("Products exported successfully!");
+        } catch (err) {
+            toast.error(err.message);
+        }
+    };
 
     const containerStyle = {
         padding:
@@ -213,18 +235,25 @@ export default function ProductDashboard() {
                             className={styles.createButton}
                             onClick={() => setIsCreateOpen(true)}
                         >
-                            <FontAwesomeIcon icon={faPlusCircle} /> Add Product
+                            <FontAwesomeIcon icon={faPlusCircle}/> Add Product
+                        </button>
+                        <button
+                            className={styles.exportButton}
+                            onClick={handleExport}
+                        >
+                            <FontAwesomeIcon icon={faCloudUploadAlt}/> Export Products
                         </button>
                     </div>
                     <div className={styles.productsGrid}>
                         {products.map((product) => (
                             <div key={product.id} className={styles.productCard}>
                                 <h2 className={styles.productName}>
-                                    <FontAwesomeIcon icon={faBox} /> {product.productName}
+                                <FontAwesomeIcon icon={faBox}/> {product.productName}
                                 </h2>
                                 {product.url && product.url !== "nan" ? (
                                     <>
-                                        <img src={product.url} alt={product.productName} className={styles.productImage} />
+                                        <img src={product.url} alt={product.productName}
+                                             className={styles.productImage}/>
                                         <button
                                             className={styles.uploadNewImageButton}
                                             onClick={() => {
@@ -245,27 +274,30 @@ export default function ProductDashboard() {
                                                 setIsImageUploadOpen(true);
                                             }}
                                         >
-                                            <FontAwesomeIcon icon={faCloudUploadAlt} /> Upload Image
+                                            <FontAwesomeIcon icon={faCloudUploadAlt}/> Upload Image
                                         </button>
                                     </div>
                                 )}
                                 <p className={styles.productDetail}>
-                                    <FontAwesomeIcon icon={faClipboardList} /> <strong>ID:</strong> {product.id}
+                                    <FontAwesomeIcon icon={faClipboardList}/> <strong>ID:</strong> {product.id}
                                 </p>
                                 <p className={styles.productDetail}>
-                                    <FontAwesomeIcon icon={faClipboardList} /> <strong>Description:</strong> {product.description}
+                                    <FontAwesomeIcon icon={faClipboardList}/>
+                                    <strong>Description:</strong> {product.description}
                                 </p>
                                 <p className={styles.productDetail}>
-                                    <FontAwesomeIcon icon={faWeightHanging} /> <strong>Quantity:</strong> {product.quantity}
+                                    <FontAwesomeIcon icon={faWeightHanging}/>
+                                    <strong>Quantity:</strong> {product.quantity}
                                 </p>
                                 <p className={styles.productDetail}>
-                                    <FontAwesomeIcon icon={faDollarSign} /> <strong>Price:</strong> ${product.price.toFixed(2)}
+                                    <FontAwesomeIcon icon={faDollarSign}/>
+                                    <strong>Price:</strong> ${product.price.toFixed(2)}
                                 </p>
                                 <p className={styles.productDetail}>
-                                    <FontAwesomeIcon icon={faTag} /> <strong>Category:</strong> {product.category}
+                                    <FontAwesomeIcon icon={faTag}/> <strong>Category:</strong> {product.category}
                                 </p>
                                 <p className={styles.productDetail}>
-                                    <FontAwesomeIcon icon={faClipboardList} /> <strong>Ingredients:</strong>{" "}
+                                    <FontAwesomeIcon icon={faClipboardList}/> <strong>Ingredients:</strong>{" "}
                                     {product.ingredients.map((ingredient) => ingredient.name).join(", ")}
                                 </p>
                                 <div className={styles.productActions}>
@@ -279,13 +311,13 @@ export default function ProductDashboard() {
                                             setIsUpdateOpen(true);
                                         }}
                                     >
-                                        <FontAwesomeIcon icon={faPenSquare} /> Edit
+                                        <FontAwesomeIcon icon={faPenSquare}/> Edit
                                     </button>
                                     <button
                                         className={styles.deleteButton}
                                         onClick={() => handleDelete(product.id)}
                                     >
-                                        <FontAwesomeIcon icon={faTrashAlt} /> Delete
+                                        <FontAwesomeIcon icon={faTrashAlt}/> Delete
                                     </button>
                                 </div>
                             </div>
@@ -302,7 +334,7 @@ export default function ProductDashboard() {
                             type="text"
                             value={newProduct.productName}
                             onChange={(e) =>
-                                setNewProduct({ ...newProduct, productName: e.target.value })
+                                setNewProduct({...newProduct, productName: e.target.value})
                             }
                             placeholder="Product Name"
                         />
