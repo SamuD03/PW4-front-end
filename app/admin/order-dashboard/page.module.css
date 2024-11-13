@@ -20,7 +20,7 @@
 
 .ordersGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Default to 3 columns */
     gap: 20px;
 }
 
@@ -92,6 +92,7 @@
     color: blue;
     background-color: #e3f2fd;
 }
+
 .loading {
     text-align: center;
     font-size: 24px;
@@ -102,4 +103,44 @@
     height: 94vh;
     font-weight: bold;
     background-size: cover;
+}
+.actions {
+     display: flex;
+     justify-content: center;
+     margin-top: 20px;
+ }
+
+.exportButton {
+    background-color: #28a745; /* Green background */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.exportButton:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+@media (max-width: 768px) {
+    .actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1024px) {
+    .ordersGrid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on iPad */
+    }
+}
+
+@media (max-width: 768px) {
+    .ordersGrid {
+        grid-template-columns: 1fr; /* 1 column on phone */
+    }
 }

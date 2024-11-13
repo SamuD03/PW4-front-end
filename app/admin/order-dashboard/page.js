@@ -3,11 +3,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faCalendarAlt,
-    faComment,
-    faClipboardList,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faComment, faClipboardList, faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,6 +12,8 @@ export default function OrderDashboard() {
     const [buyers, setBuyers] = useState({});
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isExportOpen, setIsExportOpen] = useState(false);
+    const [exportDate, setExportDate] = useState("");
 
     useEffect(() => {
         async function fetchOrders() {
@@ -29,7 +27,6 @@ export default function OrderDashboard() {
                 const data = await response.json();
                 setOrders(data);
 
-                // Fetch buyer names for each order
                 const uniqueBuyerIds = [...new Set(data.map(order => order.idBuyer))];
                 const buyerPromises = uniqueBuyerIds.map(async (buyerId) => {
                     try {
@@ -42,7 +39,7 @@ export default function OrderDashboard() {
                         const user = await res.json();
                         return { id: buyerId, name: `${user.name} ${user.surname}` };
                     } catch {
-                        return { id: buyerId, name: "Error" }; // Handle fetch error
+                        return { id: buyerId, name: "Error" };
                     }
                 });
 
@@ -64,26 +61,25 @@ export default function OrderDashboard() {
         fetchOrders();
     }, []);
 
-    const handleStatusChange = async (orderId, newStatus) => {
+    const handleExport = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/orders/${orderId}/status`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
+            const response = await fetch(`http://localhost:8080/admin/order/${exportDate}/export`, {
+                method: "GET",
                 credentials: "include",
-                body: JSON.stringify({ status: newStatus }),
             });
-            if (response.ok) {
-                setOrders(
-                    orders.map((order) =>
-                        order.id === orderId ? { ...order, status: newStatus } : order
-                    )
-                );
-                toast.success("Order status updated successfully!");
-            } else {
-                throw new Error("Failed to update order status");
+            if (!response.ok) {
+                throw new Error("Failed to export orders");
             }
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `orders_${exportDate}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            toast.success("Orders exported successfully!");
         } catch (err) {
-            setError(err.message);
             toast.error(err.message);
         }
     };
@@ -100,6 +96,15 @@ export default function OrderDashboard() {
             {error && <p className={styles.error}>{error}</p>}
 
             <ToastContainer />
+
+            <div className={styles.actions}>
+                <button
+                    className={styles.exportButton}
+                    onClick={() => setIsExportOpen(true)}
+                >
+                    <FontAwesomeIcon icon={faCloudUploadAlt} /> Export Orders
+                </button>
+            </div>
 
             <div className={styles.ordersGrid}>
                 {orders.map((order) => (
@@ -140,6 +145,28 @@ export default function OrderDashboard() {
                     </div>
                 ))}
             </div>
+
+            {isExportOpen && (
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <h2>Select Export Date</h2>
+                        <input
+                            type="date"
+                            value={exportDate}
+                            onChange={(e) => setExportDate(e.target.value)}
+                            className={styles.inputField}
+                        />
+                        <div className={styles.buttonGroup}>
+                            <button onClick={handleExport} className={styles.updateButton}>
+                                Export
+                            </button>
+                            <button onClick={() => setIsExportOpen(false)} className={styles.cancelButton}>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

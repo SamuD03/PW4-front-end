@@ -114,7 +114,7 @@ export default function UserDashboard() {
 
     return (
         <div className={styles.container} style={containerStyle}>
-            <h1 className={styles.title}>User Dashboard</h1>
+            <p className={styles.title}>User Dashboard</p>
             {error && <p className={styles.error}>{error}</p>}
 
             <button

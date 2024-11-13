@@ -54,7 +54,7 @@ const PersonalOrders = () => {
 
     return (
         <div className={classes.container}>
-            <h2>Your Orders</h2>
+            <h1>Your Orders</h1>
             {orders.length === 0 ? (
                 <p>No orders found.</p>
             ) : (
