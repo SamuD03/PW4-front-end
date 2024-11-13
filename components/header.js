@@ -15,7 +15,7 @@ const Header = () => {
             <a href="/" className={`${classes.navLink} ${pathname === '/' ? classes.active : ''}`}>Home</a>
           </li>
           <li className={classes.navItem}>
-            <a href="/torte" className={`${classes.navLink} ${pathname === '/torte' ? classes.active : ''}`}>Torte</a>
+            <a href="/prodotti" className={`${classes.navLink} ${pathname === '/prodotti' ? classes.active : ''}`}>Prodotti</a>
           </li>
           <li className={classes.navItem}>
             <a href="/contatti" className={`${classes.navLink} ${pathname === '/contatti' ? classes.active : ''}`}>Contatti</a>

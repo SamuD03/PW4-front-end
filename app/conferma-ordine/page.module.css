@@ -1,0 +1,154 @@
+.root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:url('../../public/confirmOrder.webp') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container{
+    display: flex;
+    width: 110vh;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-bottom: 10vh;
+    background-color: aliceblue;
+}
+
+.summary{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(82, 158, 82, 0.26);
+    flex-grow: 1;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3vh;
+    padding: 0 2vh 2vh 2vh;
+}
+
+.label{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+}
+
+.label textarea{
+    max-height: 25vh;
+    max-width: 20vw;
+    min-height: 6vh;
+    border-radius: 15px;
+    padding: 1vh;
+    border: 2px solid rgb(213, 171, 194);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.label textarea:focus{
+    outline: none;
+    border: 2px solid rgb(199, 193, 220);
+}
+
+.label input, .label select{
+    border: 2px solid rgb(213, 171, 194);
+    padding-left: 1vh;
+    border-radius: 15px;
+    width: 30vh;
+    height: 3.5vh;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.label input:focus, .label select:focus{
+    outline: none;
+    border: 2px solid rgb(199, 193, 220);
+}
+
+.title{
+    text-align: center;
+}
+
+.btn{
+    all: unset;
+    text-align: center;
+    padding: 10px 15px;
+    background-color: rgb(213, 171, 194);
+    border-radius: 25px;
+    align-self: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.btn:hover{
+    background-color: rgb(199, 193, 220);
+    transition: .4s;
+}
+
+.listItem{
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vh;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* sfondo semi-trasparente */
+    z-index: 9999;
+}
+
+.popupContent {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    width: 60vw;
+    max-width: 500px;
+}
+
+.closeBtn {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: rgb(213, 171, 194);
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
+.closeBtn:hover {
+    background-color: rgb(199, 193, 220);
+    transition: .4s;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 90vw;
+    }
+    .summary {
+        padding: 2vh;
+    }
+    .formContainer {
+        padding: 2vh;
+    }
+    .label textarea {
+        max-width: 100%;
+    }
+}
