@@ -352,20 +352,22 @@
     }
 }
 .exportButton {
-    background-color: #218838;
+    background-color: #28a745; /* Green background */
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 30px;
     cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 14px;
     transition: background-color 0.3s ease;
-    max-height: 40px;
 }
 
 .exportButton:hover {
     background-color: #1b4e2a; /* Darker green on hover */
+}
+@media (max-width: 768px) {
+    .actions {
+        flex-direction: column;
+        align-items: center;
+    }
 }
