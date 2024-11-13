@@ -1,9 +1,7 @@
 'use client';
 
-// import ImmaginePrincipale from "@/components/immagine-principale/immagine-principale";
 import { useState } from "react";
 import classes from './page.module.css';
-// import MapComponent from "@/components/map-component/map-component";
 import Image from 'next/image';
 import DomandeGenerali from "@/components/domande/domande";
 import { ToastContainer, toast } from 'react-toastify';
@@ -113,10 +111,17 @@ export default function Contatti() {
             </div>
 
             <div className={classes.mappa}>
-                {/* <MapComponent /> */}
-                <a href="https://www.google.com/maps/place/Pasticceria+C'est+la+Vie/@45.8192222,8.824325,16z/data=!3m2!4b1!5s0x47867e27b198e831:0x5758c9fb3726d89d!4m6!3m5!1s0x478680831df813a5:0x59e2eeb682bd2280!8m2!3d45.8192222!4d8.8268999!16s%2Fg%2F11bwy_qrdy?authuser=0&entry=ttu&g_ep=EgoyMDI0MTExMC4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-                    <img src="mappa.png" alt="mappa" />
-                </a>
+                <div className={classes.mappaMaps}>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d357247.0025191897!2d8.536769501547827!3d45.610800578559996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478680831df813a5%3A0x59e2eeb682bd2280!2sPasticceria%20C&#39;est%20la%20Vie!5e0!3m2!1sen!2sit!4v1731506156363!5m2!1sen!2sit"
+                        width="1519"
+                        height="500"
+                        style={{ border: 0 }}
+                        allowFullScreen=""
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
             </div>
 
             <div className={classes.domande}>

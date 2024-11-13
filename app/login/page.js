@@ -3,6 +3,9 @@
 import { useState } from "react";
 import classes from './page.module.css';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Login() {
     const [emailOrPhone, setEmailOrPhone] = useState("");
     const [password, setPassword] = useState("");
@@ -45,12 +48,14 @@ export default function Login() {
             });
 
             if (response.ok) {
-                alert("Login eseguito con successo!");
+                toast.success("Login eseguito con successo!");
                 const sessionCookie = document.cookie.split("; ").find(cookie => cookie.startsWith("SESSION_ID="));
                 if (sessionCookie) {
                     const sessionIdValue = sessionCookie.split("=")[1];
                     setSessionId(sessionIdValue);
-                    window.location.href = "/";  // Redirige alla pagina del profilo
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 3000);// Redirige alla pagina del profilo
                 }
             } else {
                 const errorText = await response.text();
@@ -80,7 +85,7 @@ export default function Login() {
 
             // Controlla la risposta del login
             if (loginResponse.ok) {
-                alert("Login eseguito con successo!");
+                toast.success("Login eseguito con successo!");
 
                 // Estrai il SESSION_ID dal cookie
                 const sessionCookie = document.cookie.split("; ").find(cookie => cookie.startsWith("SESSION_ID="));
@@ -104,6 +109,10 @@ export default function Login() {
 
     return (
         <>
+            <div>
+                <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+            </div>
+
             <div className={classes.container}>
 
                 <div className={classes.formContainer}>
