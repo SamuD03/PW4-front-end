@@ -1,7 +1,23 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';  // Import useRouter from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faPowerOff,
+    faList,
+    faUser,
+    faEnvelope,
+    faPhone,
+    faBell,
+    faUsers,
+    faClipboard,
+    faCogs,
+    faShoppingCart,
+    faIdBadge,
+} from '@fortawesome/free-solid-svg-icons';
 import classes from './page.module.css';
 
 const ProfilePage = () => {
@@ -9,15 +25,14 @@ const ProfilePage = () => {
     const [notification, setNotification] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
-    const router = useRouter(); // Initialize the router
+    const router = useRouter();
 
     useEffect(() => {
-        // Fetch the user profile data from the backend
         const fetchProfile = async () => {
             try {
                 const response = await fetch('http://localhost:8080/user/profile', {
                     method: 'GET',
-                    credentials: 'include', // Include cookies in the request
+                    credentials: 'include',
                 });
 
                 if (!response.ok) {
@@ -26,9 +41,10 @@ const ProfilePage = () => {
 
                 const userData = await response.json();
                 setUser(userData);
-                setNotification(userData.notification); // Set initial notification state
+                setNotification(userData.notification);
             } catch (error) {
                 setError(error.message);
+                toast.error(error.message);
             } finally {
                 setLoading(false);
             }
@@ -52,9 +68,15 @@ const ProfilePage = () => {
                 throw new Error('Failed to update notification preference');
             }
 
-            setNotification(!notification); // Toggle notification state
+            setNotification(!notification);
+            toast.success(
+                notification
+                    ? 'Notifications have been turned off'
+                    : 'Notifications have been turned on'
+            );
         } catch (error) {
             setError(error.message);
+            toast.error(error.message);
         }
     };
 
@@ -62,50 +84,77 @@ const ProfilePage = () => {
         try {
             const response = await fetch('http://localhost:8080/auth/logout', {
                 method: 'DELETE',
-                credentials: 'include', // Include cookies in the request
+                credentials: 'include',
             });
 
             if (!response.ok) {
                 throw new Error('Failed to log out');
             }
 
-            // Redirect to the login page after successful logout
+            toast.success('You have logged out successfully!');
             window.location.href = '/login';
         } catch (error) {
             setError(error.message);
+            toast.error(error.message);
         }
     };
 
     const handleViewOrders = () => {
-        router.push('/personal-orders'); // Navigate to the PersonalOrders page
+        router.push('/personal-orders');
     };
 
-    if (loading) return <div className={classes.loading}>Loading...</div>;
+    if (loading) return (
+        <div style={{
+            textAlign: 'center',
+            fontSize: '24px', // Increased font size
+            color: '#777',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '91vh',
+            fontWeight: 'bold',
+            background: "url('/sfondoprofilo.png') no-repeat center center",
+            backgroundSize: 'cover'
+        }}>
+            Loading...
+        </div>
+    );
     if (error) return <div className={classes.error}>{error}</div>;
 
     return (
         <div className={classes.container}>
-            {user ? (
+            <ToastContainer/>
+            <div className={classes.profileCardWrapper}>
                 <div className={classes.profileCard}>
                     <h2>Profile Information</h2>
                     <div className={classes.profileField}>
-                        <span className={classes.profileLabel}>Name:</span>
+                <span className={classes.profileLabel}>
+                    <FontAwesomeIcon icon={faUser} style={{marginRight: '8px'}}/> Name:
+                </span>
                         <span className={classes.profileValue}>{user.name}</span>
                     </div>
                     <div className={classes.profileField}>
-                        <span className={classes.profileLabel}>Surname:</span>
+                <span className={classes.profileLabel}>
+                    <FontAwesomeIcon icon={faIdBadge} style={{marginRight: '8px'}}/> Surname:
+                </span>
                         <span className={classes.profileValue}>{user.surname}</span>
                     </div>
                     <div className={classes.profileField}>
-                        <span className={classes.profileLabel}>Email:</span>
+                <span className={classes.profileLabel}>
+                    <FontAwesomeIcon icon={faEnvelope} style={{marginRight: '8px'}}/> Email:
+                </span>
                         <span className={classes.profileValue}>{user.email || 'N/A'}</span>
                     </div>
                     <div className={classes.profileField}>
-                        <span className={classes.profileLabel}>Phone:</span>
+                <span className={classes.profileLabel}>
+                    <FontAwesomeIcon icon={faPhone} style={{marginRight: '8px'}}/> Phone:
+                </span>
                         <span className={classes.profileValue}>{user.number || 'N/A'}</span>
                     </div>
                     <div className={classes.profileField}>
-                        <span className={classes.profileLabel}>Notification:</span>
+                <span className={classes.profileLabel}>
+                    <FontAwesomeIcon icon={faBell} style={{marginRight: '8px'}}/> Notification:
+                </span>
                         <label className={classes.toggleSwitch}>
                             <input
                                 type="checkbox"
@@ -116,16 +165,30 @@ const ProfilePage = () => {
                         </label>
                     </div>
                     <button className={classes.logoutButton} onClick={handleLogout}>
-                        <i className="fa fa-sign-out-alt" style={{marginRight: "8px"}}></i> Logout
+                        <FontAwesomeIcon icon={faPowerOff} style={{marginRight: '8px'}}/> Logout
                     </button>
-
                     <button className={classes.viewOrdersButton} onClick={handleViewOrders}>
-                        <i className="fa fa-list" style={{marginRight: "8px"}}></i> View Orders
+                        <FontAwesomeIcon icon={faList} style={{marginRight: '8px'}}/> View Orders
                     </button>
-
                 </div>
-            ) : (
-                <div className={classes.error}>No user data available</div>
+            </div>
+
+            {user?.admin && (
+                <div className={classes.adminPanel}>
+                    <h2 className={classes.adminTitle}>Admin Panel</h2>
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/user-dashboard')}>
+                        <FontAwesomeIcon icon={faUsers} style={{marginRight: '10px'}}/> User Dashboard
+                    </button>
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/ingredients-dashboard')}>
+                        <FontAwesomeIcon icon={faClipboard} style={{marginRight: '10px'}}/> Ingredients Dashboard
+                    </button>
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/product-dashboard')}>
+                        <FontAwesomeIcon icon={faCogs} style={{marginRight: '10px'}}/> Product Dashboard
+                    </button>
+                    <button className={classes.adminButton} onClick={() => router.push('/admin/order-dashboard')}>
+                        <FontAwesomeIcon icon={faShoppingCart} style={{marginRight: '10px'}}/> Order Dashboard
+                    </button>
+                </div>
             )}
         </div>
     );

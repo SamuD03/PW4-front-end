@@ -115,7 +115,7 @@ export default function Contatti() {
             <div className={classes.mappa}>
                 {/* <MapComponent /> */}
                 <a href="https://www.google.com/maps/place/Pasticceria+C'est+la+Vie/@45.8192222,8.824325,16z/data=!3m2!4b1!5s0x47867e27b198e831:0x5758c9fb3726d89d!4m6!3m5!1s0x478680831df813a5:0x59e2eeb682bd2280!8m2!3d45.8192222!4d8.8268999!16s%2Fg%2F11bwy_qrdy?authuser=0&entry=ttu&g_ep=EgoyMDI0MTExMC4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-                    <Image src="/mappa.png" alt="mappa" width={1519} height={450} />
+                    <img src="mappa.png" alt="mappa" />
                 </a>
             </div>
 
