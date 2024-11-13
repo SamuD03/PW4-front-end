@@ -4,7 +4,9 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #fff;
+    background: url('/personalOrders.png') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .h2 {
@@ -85,4 +87,10 @@
     color: red;
     text-align: center;
     margin-top: 10px;
+}
+@media (max-width: 768px) {
+    .orderCard {
+        width: 100%;
+        padding: 15px;
+    }
 }
