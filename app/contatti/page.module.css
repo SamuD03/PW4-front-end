@@ -46,12 +46,14 @@
 }
 
 .informazioni {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 150px;
     border: 2px solid #ffd1ba;
-
+    margin-top: 134px;
 }
 
 .form {
@@ -163,8 +165,20 @@
 
 /* mappa */
 .mappa {
-    margin-top: 20px;
+    margin-top: 80px;
     width: 100%;
+}
+
+/* notifiche */
+.notification {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    border-radius: 5px;
 }
 
 /* Media query per schermi piccoli (smartphone) */
