@@ -8,6 +8,8 @@ import {
     faComment,
     faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function OrderDashboard() {
     const [orders, setOrders] = useState([]);
@@ -52,6 +54,7 @@ export default function OrderDashboard() {
                 setBuyers(buyerMap);
             } catch (err) {
                 setError(err.message);
+                toast.error(err.message);
             }
         }
 
@@ -72,11 +75,13 @@ export default function OrderDashboard() {
                         order.id === orderId ? { ...order, status: newStatus } : order
                     )
                 );
+                toast.success("Order status updated successfully!");
             } else {
                 throw new Error("Failed to update order status");
             }
         } catch (err) {
             setError(err.message);
+            toast.error(err.message);
         }
     };
 
@@ -84,6 +89,8 @@ export default function OrderDashboard() {
         <div className={styles.container}>
             <h1 className={styles.title}>Order Dashboard</h1>
             {error && <p className={styles.error}>{error}</p>}
+
+            <ToastContainer />
 
             <div className={styles.ordersGrid}>
                 {orders.map((order) => (
