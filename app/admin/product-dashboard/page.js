@@ -191,6 +191,28 @@ export default function ProductDashboard() {
             toast.error(err.message);
         }
     };
+    const handleExport = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/admin/product/export", {
+                method: "GET",
+                credentials: "include",
+            });
+            if (!response.ok) {
+                throw new Error("Failed to export products");
+            }
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "products.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            toast.success("Products exported successfully!");
+        } catch (err) {
+            toast.error(err.message);
+        }
+    };
 
     const containerStyle = {
         padding:
@@ -213,14 +235,20 @@ export default function ProductDashboard() {
                             className={styles.createButton}
                             onClick={() => setIsCreateOpen(true)}
                         >
-                            <FontAwesomeIcon icon={faPlusCircle} /> Add Product
+                            <FontAwesomeIcon icon={faPlusCircle}/> Add Product
+                        </button>
+                        <button
+                            className={styles.exportButton}
+                            onClick={handleExport}
+                        >
+                            <FontAwesomeIcon icon={faCloudUploadAlt}/> Export Products
                         </button>
                     </div>
                     <div className={styles.productsGrid}>
                         {products.map((product) => (
                             <div key={product.id} className={styles.productCard}>
                                 <h2 className={styles.productName}>
-                                    <FontAwesomeIcon icon={faBox}/> {product.productName}
+                                <FontAwesomeIcon icon={faBox}/> {product.productName}
                                 </h2>
                                 {product.url && product.url !== "nan" ? (
                                     <>
