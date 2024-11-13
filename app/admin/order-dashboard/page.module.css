@@ -20,7 +20,7 @@
 
 .ordersGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Default to 3 columns */
     gap: 20px;
 }
 
@@ -92,6 +92,7 @@
     color: blue;
     background-color: #e3f2fd;
 }
+
 .loading {
     text-align: center;
     font-size: 24px;
@@ -102,4 +103,16 @@
     height: 94vh;
     font-weight: bold;
     background-size: cover;
+}
+
+@media (max-width: 1024px) {
+    .ordersGrid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on iPad */
+    }
+}
+
+@media (max-width: 768px) {
+    .ordersGrid {
+        grid-template-columns: 1fr; /* 1 column on phone */
+    }
 }
