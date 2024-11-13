@@ -92,3 +92,14 @@
     color: blue;
     background-color: #e3f2fd;
 }
+.loading {
+    text-align: center;
+    font-size: 24px;
+    color: #777;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 94vh;
+    font-weight: bold;
+    background-size: cover;
+}

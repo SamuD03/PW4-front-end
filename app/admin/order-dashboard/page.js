@@ -15,6 +15,7 @@ export default function OrderDashboard() {
     const [orders, setOrders] = useState([]);
     const [buyers, setBuyers] = useState({});
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchOrders() {
@@ -55,6 +56,8 @@ export default function OrderDashboard() {
             } catch (err) {
                 setError(err.message);
                 toast.error(err.message);
+            } finally {
+                setLoading(false);
             }
         }
 
@@ -84,6 +87,12 @@ export default function OrderDashboard() {
             toast.error(err.message);
         }
     };
+
+    if (loading) return (
+        <div className={styles.loading}>
+            Loading...
+        </div>
+    );
 
     return (
         <div className={styles.container}>
