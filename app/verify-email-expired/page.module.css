@@ -1,0 +1,54 @@
+/* Container Styling */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 91vh;
+    background: url('/emailVerify.png') no-repeat center center;
+    background-size: cover;
+}
+
+/* Card Styling */
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Verified Text Styling */
+.verifiedText {
+    color: #a72828;
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Login Button Styling */
+.loginButton {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Login Button Hover Effect */
+.loginButton:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 91, 187, 0.3);
+}
+
+/* Card Hover Effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
