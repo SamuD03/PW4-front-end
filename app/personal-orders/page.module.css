@@ -88,6 +88,126 @@
     text-align: center;
     margin-top: 10px;
 }
+
+/* Filter Dropdown Button */
+.filterDropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.filterButton {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding for button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    transition: background-color 0.3s;
+}
+
+.filterButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.dropdownContent {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow */
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1;
+    padding: 10px;
+}
+
+.filterDropdown:hover .dropdownContent {
+    display: block; /* Show the dropdown on hover */
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    border-left: 5px solid transparent; /* Default border for color indicator */
+}
+
+.dropdownItem:hover {
+    background-color: #f1f1f1; /* Light background on hover */
+}
+
+/* Color-Coded Status Labels */
+.dropdownItem.pending {
+    border-left-color: #ffcc00; /* Yellow for pending */
+    color: #ffcc00;
+}
+
+.dropdownItem.confirmed {
+    border-left-color: #4CAF50; /* Green for confirmed */
+    color: #4CAF50;
+}
+
+.dropdownItem.cancelled {
+    border-left-color: #ff3333; /* Red for cancelled */
+    color: #ff3333;
+}
+
+.dropdownItem.delivered {
+    border-left-color: #2196F3; /* Blue for delivered */
+    color: #2196F3;
+}
+
+.dropdownItem input {
+    margin-right: 10px;
+}
+
+.dropdownItem span {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+/* Cancel Button */
+.cancelButton {
+    background-color: #ff3333; /* Red background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancelButton:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+.extraPadding {
+    padding-bottom: 600px;
+}
+.pending {
+    color: goldenrod;
+}
+
+.confirmed {
+    color: green;
+}
+
+.cancelled {
+    color: red;
+}
+
+.delivered {
+    color: blue;
+}
+/* Media Queries for Responsive Design */
 @media (max-width: 768px) {
     .orderCard {
         width: 100%;
