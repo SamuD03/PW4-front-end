@@ -12,7 +12,7 @@
 .container{
     display: flex;
     width: 110vh;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
     border-radius: 30px;
     overflow: hidden;
     margin-bottom: 15vh;
@@ -49,31 +49,31 @@
 
 .label textarea{
     max-height: 25vh;
-    max-width: 30vh;
+    max-width: 90%;
     min-height: 6vh;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 1vh;
-    border: 2px solid rgb(213, 171, 194);
+    border: 3px solid rgb(213, 171, 194);
     background-color: aliceblue;
 }
 
 .label textarea:focus{
     outline: none;
-    border: 2px solid rgb(199, 193, 220);
+    border: 3px solid rgb(199, 193, 220);
 }
 
 .label input, .label select{
     border: none;
-    padding-left: 1vh;
-    border-bottom: 2px solid rgb(213, 171, 194);
-    width: 30vh;
-    height: 3.5vh;
+    padding: 1vh;
+    border-bottom: 3px solid rgb(213, 171, 194);
+    border-radius: 10px;
+    width: 90%;
     background-color: aliceblue;
 }
 
 .label input:focus, .label select:focus{
     outline: none;
-    border: 2px solid rgb(199, 193, 220);
+    border-bottom: 3px solid rgb(199, 193, 220);
 }
 
 .title{
@@ -87,7 +87,7 @@
     background-color: rgb(213, 171, 194);
     border-radius: 25px;
     align-self: center;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
 }
 
 .btn:hover{
@@ -154,10 +154,6 @@
     .formContainer{
         align-items: center;
         text-align: center;
-    }
-
-    .label textarea, .label input, .label select {
-        max-width: 22vh;
     }
 
     .mainTitle{

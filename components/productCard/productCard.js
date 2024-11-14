@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
+import {toast} from "react-toastify";
 import classes from "./productCard.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const DEFAULT_IMAGE = '/placeholder.png'
 
@@ -32,6 +34,7 @@ export default function ProductCard({ product, addToOrderList, showIngredients})
             addToOrderList({ id, productName, price, quantitySelected });
             setQuantitySelected(0); // Reset quantity after adding
             setFeedbackMessage("");
+            toast.success(`${productName} aggiunto al carrello`)
         } else {
             setFeedbackMessage("Please select a quantity greater than zero.");
         }
@@ -43,19 +46,6 @@ export default function ProductCard({ product, addToOrderList, showIngredients})
                     <img
                         src={imageURL}
                         alt={"img_" + productName} />
-                {/*{imageURL!="nan" ?(*/}
-                {/*    <img*/}
-                {/*        src={imageURL}*/}
-                {/*        alt={"img_" + productName}*/}
-
-                {/*    />*/}
-                {/*):(*/}
-                {/*    <img*/}
-                {/*        src={placeholder}*/}
-                {/*        alt={"product_img"}*/}
-
-                {/*    />*/}
-                {/*)}*/}
             </div>
 
                 <h4>{productName}</h4>

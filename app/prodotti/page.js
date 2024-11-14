@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import ProductCard from "@/components/productCard/ProductCard"; // Ensure the path is correct
 import classes from "./page.module.css";
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Page() {
     const [products, setProducts] = useState([]);
@@ -60,6 +62,7 @@ export default function Page() {
 
     return (
         <div className={classes.content}>
+            <ToastContainer/>
             <div className={classes.productPage}>
                 <h1 className={classes.mainTitle}>Our Products</h1>
 
