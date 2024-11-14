@@ -61,6 +61,30 @@ export default function OrderDashboard() {
         fetchOrders();
     }, []);
 
+    const handleStatusChange = async (orderId, newStatus) => {
+        try {
+            const response = await fetch(`http://localhost:8080/orders/${orderId}/status`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ status: newStatus }),
+            });
+            if (response.ok) {
+                setOrders(
+                    orders.map((order) =>
+                        order.id === orderId ? { ...order, status: newStatus } : order
+                    )
+                );
+                toast.success("Order status updated successfully!");
+            } else {
+                throw new Error("Failed to update order status");
+            }
+        } catch (err) {
+            setError(err.message);
+            toast.error(err.message);
+        }
+    };
+
     const handleExport = async () => {
         try {
             const response = await fetch(`http://localhost:8080/admin/order/${exportDate}/export`, {
