@@ -4,7 +4,7 @@ import Header from '@/components/header/header.js';
 import Footer from '@/components/footer/footer';
 
 export const metadata = {
-  title: 'NextJS Course App',
+  title: "C'est La Vie | Pasticceria a Varese",
   description: 'Your first NextJS app!',
 };
 

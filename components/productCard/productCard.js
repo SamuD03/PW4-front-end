@@ -1,13 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "./productCard.module.css";
-import Image from "next/image";
-import placeholder from "@/public/placeholder.png"
 
-export default function ProductCard({ product, addToOrderList }) {
-    const { id, productName, description, price, quantity, url } = product;
+const DEFAULT_IMAGE = '/placeholder.png'
+
+export default function ProductCard({ product, addToOrderList, showIngredients}) {
+    const { id, productName, description, price, quantity, ingredients, url } = product;
     const [quantitySelected, setQuantitySelected] = useState(0);
     const [feedbackMessage, setFeedbackMessage] = useState("");
+    const [imageURL, setImageURL] = useState(DEFAULT_IMAGE);
+
+    useEffect(() => {
+        // Set the image URL or use placeholder if the url is "nan"
+        setImageURL(url && url !== "nan" ? url : DEFAULT_IMAGE);
+    }, []);
 
     const handleIncrease = () => {
         if (quantitySelected < quantity) {
@@ -27,45 +33,66 @@ export default function ProductCard({ product, addToOrderList }) {
             setQuantitySelected(0); // Reset quantity after adding
             setFeedbackMessage("");
         } else {
-            setFeedbackMessage("Please select a quantity greater than zero.")
+            setFeedbackMessage("Please select a quantity greater than zero.");
         }
     };
 
     return (
         <div className={classes.card}>
-            {url != "nan" ? (
-                <Image src={url} alt={"img_"+ productName}/>
-            ):(
-                <Image src={placeholder} alt={"product_img"}/>
-            )}
+            <div className={classes.image}>
+                    <img
+                        src={imageURL}
+                        alt={"img_" + productName} />
+                {/*{imageURL!="nan" ?(*/}
+                {/*    <img*/}
+                {/*        src={imageURL}*/}
+                {/*        alt={"img_" + productName}*/}
 
-            <h4>{productName}</h4>
-            <p>{description}</p>
+                {/*    />*/}
+                {/*):(*/}
+                {/*    <img*/}
+                {/*        src={placeholder}*/}
+                {/*        alt={"product_img"}*/}
+
+                {/*    />*/}
+                {/*)}*/}
+            </div>
+
+                <h4>{productName}</h4>
+                <p>{description}</p>
+                <button  className={classes.btn} onClick={() => showIngredients(id)}>
+                    Ingredienti
+                </button>
+
             <p>Price: €{price.toFixed(2)}</p>
             <div className={classes.quantity}>
-                <svg onClick={handleDecrease}
-                     xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 448 512">
-                    <path
-                        d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/>
-                </svg>
-                <span>{quantitySelected}</span>
-                <svg onClick={handleIncrease}
-                     xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 448 512">
-                    <path
-                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/>
-                </svg>
-            </div>
-            <button className={classes.btn} onClick={handleAddToCart}>
-                Add to Order
-            </button>
-
-            {/* Mostra il messaggio di feedback */}
-            {feedbackMessage && (
-                <div className={classes.errorMessage}>
-                    {feedbackMessage}
+                <svg
+                    onClick={handleDecrease}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                >
+                <path
+                            d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/>
+                    </svg>
+                    <span>{quantitySelected}</span>
+                    <svg
+                        onClick={handleIncrease}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                    >
+                        <path
+                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/>
+                    </svg>
                 </div>
+            {quantitySelected === quantity && (
+                <p>Max diponibile</p>
+            )}
+                <button className={classes.btn} onClick={handleAddToCart}>
+                    Add to Order
+                </button>
+
+            {feedbackMessage && (
+                <div className={classes.errorMessage}>{feedbackMessage}</div>
             )}
         </div>
     );

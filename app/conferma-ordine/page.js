@@ -120,7 +120,7 @@ export default function Page() {
 
     return (
         <div className={classes.root}>
-            <h1>Conferma Ordine</h1>
+            <h1 className={classes.mainTitle}>Conferma Ordine</h1>
             <div className={classes.container}>
                 <div className={classes.summary}>
                     <h3 className={classes.title}>Carrello</h3>
